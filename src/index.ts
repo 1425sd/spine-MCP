@@ -7,6 +7,7 @@ import { registerSpineAddSimpleAnimationTool } from "./tools/spine-add-simple-an
 import { registerSpineBuildAnimationFromExistingProjectTool } from "./tools/spine-build-animation-from-existing-project.js";
 import { registerSpineBuildAnimationFromJsonTool } from "./tools/spine-build-animation-from-json.js";
 import { registerSpineCleanTool } from "./tools/spine-clean.js";
+import { registerSpineControlBonesTool } from "./tools/spine-control-bones.js";
 import { registerSpineExportTool } from "./tools/spine-export.js";
 import { registerSpineGenerateAnimationJsonTool } from "./tools/spine-generate-animation-json.js";
 import { registerSpineGetGenerationGuideTool } from "./tools/spine-get-generation-guide.js";
@@ -32,6 +33,7 @@ const toolRegistrations: ToolRegistration[] = [
   { name: "spine_analyze_json", register: registerSpineAnalyzeJsonTool },
   { name: "spine_generate_animation_json", register: registerSpineGenerateAnimationJsonTool },
   { name: "spine_add_simple_animation", register: registerSpineAddSimpleAnimationTool },
+  { name: "spine_control_bones", register: registerSpineControlBonesTool },
   { name: "spine_scan_corpus", register: registerSpineScanCorpusTool },
   { name: "spine_learn_from_corpus", register: registerSpineLearnFromCorpusTool },
   { name: "spine_get_generation_guide", register: registerSpineGetGenerationGuideTool },

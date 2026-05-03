@@ -170,7 +170,7 @@ This server works with existing `.spine` projects and Spine JSON files. All anim
 
 1. Have an existing `.spine` project or Spine JSON file ready.
 2. Use `spine_analyze_json` to inspect the skeleton structure.
-3. Use `spine_build_animation_from_json` or `spine_build_animation_from_existing_project` to add animations.
+3. Use `spine_control_bones`, `spine_build_animation_from_json`, or `spine_build_animation_from_existing_project` to add animations.
 4. Use `spine_export` to export the final output.
 
 ### `spine_analyze_json`
@@ -204,6 +204,43 @@ overwrite = true
 ```
 
 It supports only `rotate`, `translate`, and `scale` timelines on one bone.
+
+### `spine_control_bones`
+
+Control multiple existing bones by writing custom rotate, translate, and scale timelines into a Spine JSON copy:
+
+```text
+Use spine_control_bones:
+sourceJsonPath = G:\cat\cat.json
+outputJsonPath = G:\cat-output\cat.controlled.json
+animationName = custom_pose_loop
+boneControls = [
+  {
+    "boneName": "head",
+    "rotate": [
+      { "time": 0, "angle": -4 },
+      { "time": 0.5, "angle": 4 },
+      { "time": 1, "angle": -4 }
+    ],
+    "translate": [
+      { "time": 0, "y": 0 },
+      { "time": 0.5, "y": 6 },
+      { "time": 1, "y": 0 }
+    ]
+  },
+  {
+    "boneName": "tail",
+    "rotate": [
+      { "time": 0, "angle": -12 },
+      { "time": 0.5, "angle": 12 },
+      { "time": 1, "angle": -12 }
+    ]
+  }
+]
+overwrite = true
+```
+
+This is the main tool for explicit bone control. It validates that each bone exists and writes JSON animation data only. It does not drag bones in the Spine editor, bind meshes, edit weights, create IK, or directly mutate `.spine` binaries.
 
 ### `spine_generate_animation_json`
 

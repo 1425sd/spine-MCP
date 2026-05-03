@@ -15,6 +15,7 @@ Allowed scope:
 - Analyze existing Spine JSON files: inspect skeleton, bones, slots, skins, attachments, and animations.
 - Infer common JSON roles such as body, head, tail, eyes, paws, root, and logo.
 - Write modified JSON copies with basic rotate, translate, scale, and slot attachment timelines.
+- Write custom rotate, translate, and scale timelines for multiple existing bones in a copied Spine JSON file.
 - Preserve source JSON files and write generated output only to user-specified output JSON paths or outputDir.
 - Import generated JSON copies through Spine CLI.
 - Export generated .spine projects through Spine CLI.
@@ -37,6 +38,7 @@ Out of scope:
 - AutoHotkey.
 - Mouse or keyboard simulation.
 - Timeline dragging.
+- Direct editor bone manipulation.
 - Mesh binding.
 - Bone weight editing.
 - Direct mutation of internal .spine project structure.

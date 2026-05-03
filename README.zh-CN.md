@@ -105,7 +105,7 @@ claude mcp add --transport stdio --env SPINE_EXE="C:\Program Files\Spine\Spine.c
 
 ## 工具列表
 
-当前 MCP 注册 15 个工具：
+当前 MCP 注册 16 个工具：
 
 - `spine_info`
 - `spine_export`
@@ -115,6 +115,7 @@ claude mcp add --transport stdio --env SPINE_EXE="C:\Program Files\Spine\Spine.c
 - `spine_analyze_json`
 - `spine_generate_animation_json`
 - `spine_add_simple_animation`
+- `spine_control_bones`
 - `spine_scan_corpus`
 - `spine_learn_from_corpus`
 - `spine_get_generation_guide`
@@ -184,7 +185,7 @@ Spine "G:\cat\cat.spine"
 
 1. 准备已有 `.spine` 项目或 Spine JSON。
 2. 使用 `spine_analyze_json` 检查骨架结构。
-3. 使用 `spine_build_animation_from_json` 或 `spine_build_animation_from_existing_project` 添加基础动画。
+3. 使用 `spine_control_bones`、`spine_build_animation_from_json` 或 `spine_build_animation_from_existing_project` 添加基础动画。
 4. 使用 `spine_export` 导出最终结果。
 
 ### `spine_analyze_json`
@@ -233,6 +234,43 @@ keyframes = [
 ]
 overwrite = true
 ```
+
+### `spine_control_bones`
+
+通过写入 Spine JSON 动画数据来控制多个已有骨骼，支持 rotate、translate、scale 时间线：
+
+```text
+Use spine_control_bones:
+sourceJsonPath = G:\cat\cat.json
+outputJsonPath = G:\cat-output\cat.controlled.json
+animationName = custom_pose_loop
+boneControls = [
+  {
+    "boneName": "head",
+    "rotate": [
+      { "time": 0, "angle": -4 },
+      { "time": 0.5, "angle": 4 },
+      { "time": 1, "angle": -4 }
+    ],
+    "translate": [
+      { "time": 0, "y": 0 },
+      { "time": 0.5, "y": 6 },
+      { "time": 1, "y": 0 }
+    ]
+  },
+  {
+    "boneName": "tail",
+    "rotate": [
+      { "time": 0, "angle": -12 },
+      { "time": 0.5, "angle": 12 },
+      { "time": 1, "angle": -12 }
+    ]
+  }
+]
+overwrite = true
+```
+
+这是当前最直接的“控制骨骼”工具。它会校验骨骼是否存在，然后写入 JSON 动画关键帧。它不会在 Spine 编辑器里拖动骨骼，不做网格绑定、权重、IK，也不直接修改 `.spine` 二进制文件。
 
 ### `spine_create_loading_animation_preset`
 

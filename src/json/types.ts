@@ -134,6 +134,7 @@ export interface SimpleBoneKeyframe {
   value?: number;
   x?: number;
   y?: number;
+  curve?: "stepped" | [number, number, number, number];
 }
 
 export interface AddSimpleAnimationRequest {
@@ -143,6 +144,21 @@ export interface AddSimpleAnimationRequest {
   targetBone: string;
   animationType: SimpleBoneAnimationType;
   keyframes: SimpleBoneKeyframe[];
+  overwrite?: boolean;
+}
+
+export interface BoneControlTimelineRequest {
+  boneName: string;
+  rotate?: SimpleBoneKeyframe[];
+  translate?: SimpleBoneKeyframe[];
+  scale?: SimpleBoneKeyframe[];
+}
+
+export interface ControlBonesAnimationRequest {
+  sourceJsonPath: string;
+  outputJsonPath: string;
+  animationName: string;
+  boneControls: BoneControlTimelineRequest[];
   overwrite?: boolean;
 }
 

@@ -14,6 +14,7 @@ const REQUIRED_TOOLS = [
   "spine_analyze_json",
   "spine_generate_animation_json",
   "spine_add_simple_animation",
+  "spine_control_bones",
   "spine_scan_corpus",
   "spine_learn_from_corpus",
   "spine_get_generation_guide",
@@ -23,7 +24,7 @@ const REQUIRED_TOOLS = [
   "spine_create_loading_animation_preset",
 ];
 
-const MIN_TOOL_COUNT = 15;
+const MIN_TOOL_COUNT = 16;
 
 let nextId = 1;
 const pendingRequests = new Map();

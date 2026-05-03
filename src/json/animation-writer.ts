@@ -10,6 +10,7 @@ import {
 } from "./presets.js";
 import type {
   AddSimpleAnimationRequest,
+  ControlBonesAnimationRequest,
   GenerateAnimationJsonRequest,
   GenerateAnimationJsonResult,
   InferredRoleName,
@@ -157,6 +158,100 @@ export async function addSimpleBoneAnimation(
     manifestPath,
     animationName: request.animationName,
     modification,
+    warnings,
+  };
+}
+
+export async function controlBonesAnimation(
+  request: ControlBonesAnimationRequest,
+): Promise<{
+  sourceJsonPath: string;
+  outputJsonPath: string;
+  manifestPath: string;
+  animationName: string;
+  modifications: JsonAnimationModification[];
+  warnings: string[];
+}> {
+  const sourceJsonPath = path.resolve(request.sourceJsonPath);
+  const outputJsonPath = path.resolve(request.outputJsonPath);
+  await assertWritableOutput(outputJsonPath, request.overwrite ?? false);
+
+  const sourceJson = await readSpineJsonFile(sourceJsonPath);
+  const nextJson = cloneJsonObject(sourceJson);
+  const analysis = analyzeSpineJsonObject(nextJson, sourceJsonPath);
+  const warnings = [...analysis.warnings];
+  const knownBones = new Set(analysis.bones.map((bone) => bone.name));
+  const animations = ensureObjectProperty(nextJson, "animations");
+  const modifications: JsonAnimationModification[] = [];
+  const animation: AnimationObject = {};
+
+  assertAnimationWriteAllowed(animations, request.animationName, request.overwrite ?? false);
+
+  for (const control of request.boneControls) {
+    if (!knownBones.has(control.boneName)) {
+      throw new Error(`boneControls contains a bone that does not exist in source JSON: ${control.boneName}`);
+    }
+
+    const timelines: Array<["rotate" | "translate" | "scale", SimpleBoneKeyframe[] | undefined]> = [
+      ["rotate", control.rotate],
+      ["translate", control.translate],
+      ["scale", control.scale],
+    ];
+
+    let wroteTimeline = false;
+    for (const [timelineName, keyframes] of timelines) {
+      if (!keyframes || keyframes.length === 0) {
+        continue;
+      }
+
+      assertNonDecreasingTimes(control.boneName, timelineName, keyframes);
+      setBoneTimeline(
+        animation,
+        control.boneName,
+        timelineName,
+        normalizeSimpleKeyframes(timelineName, keyframes),
+      );
+      modifications.push({
+        kind: "custom",
+        target: control.boneName,
+        timeline: timelineName,
+        keyframeCount: keyframes.length,
+      });
+      wroteTimeline = true;
+    }
+
+    if (!wroteTimeline) {
+      warnings.push(`boneControls entry for "${control.boneName}" did not include any timeline keyframes.`);
+    }
+  }
+
+  if (modifications.length === 0) {
+    throw new Error("boneControls must include at least one rotate, translate, or scale timeline.");
+  }
+
+  animations[request.animationName] = animation;
+  await writeJsonFile(outputJsonPath, nextJson);
+
+  const manifestPath = await writeJsonAnimationManifest({
+    outputJsonPath,
+    manifest: {
+      tool: "spine_control_bones",
+      request,
+      sourceJsonPath,
+      outputJsonPath,
+      animationName: request.animationName,
+      modifications,
+      warnings,
+      createdAt: new Date().toISOString(),
+    },
+  });
+
+  return {
+    sourceJsonPath,
+    outputJsonPath,
+    manifestPath,
+    animationName: request.animationName,
+    modifications,
     warnings,
   };
 }
@@ -453,7 +548,7 @@ function addFloating(
 function normalizeSimpleKeyframes(
   animationType: "rotate" | "translate" | "scale",
   keyframes: SimpleBoneKeyframe[],
-): Array<Record<string, number>> {
+): Array<Record<string, number | string | number[]>> {
   if (keyframes.length === 0) {
     throw new Error("keyframes must contain at least one keyframe.");
   }
@@ -468,22 +563,55 @@ function normalizeSimpleKeyframes(
       if (typeof angle !== "number") {
         throw new Error("Rotate keyframes require angle or value.");
       }
-      return { time: keyframe.time, angle };
+      return addCurve({ time: keyframe.time, angle }, keyframe);
     }
 
     if (animationType === "translate") {
       const frame: Record<string, number> = { time: keyframe.time };
       if (typeof keyframe.x === "number") frame.x = keyframe.x;
       if (typeof keyframe.y === "number") frame.y = keyframe.y;
-      return frame;
+      if (!Object.prototype.hasOwnProperty.call(frame, "x") && !Object.prototype.hasOwnProperty.call(frame, "y")) {
+        throw new Error("Translate keyframes require x and/or y.");
+      }
+      return addCurve(frame, keyframe);
     }
 
-    return {
+    return addCurve({
       time: keyframe.time,
       x: typeof keyframe.x === "number" ? keyframe.x : 1,
       y: typeof keyframe.y === "number" ? keyframe.y : 1,
-    };
+    }, keyframe);
   });
+}
+
+function addCurve<T extends Record<string, number>>(
+  frame: T,
+  keyframe: SimpleBoneKeyframe,
+): T | (T & { curve: "stepped" | number[] }) {
+  if (!keyframe.curve) {
+    return frame;
+  }
+
+  return {
+    ...frame,
+    curve: keyframe.curve === "stepped" ? "stepped" : keyframe.curve,
+  };
+}
+
+function assertNonDecreasingTimes(
+  boneName: string,
+  timelineName: "rotate" | "translate" | "scale",
+  keyframes: SimpleBoneKeyframe[],
+): void {
+  let previousTime = -Infinity;
+  for (const keyframe of keyframes) {
+    if (keyframe.time < previousTime) {
+      throw new Error(
+        `Keyframes for ${boneName}.${timelineName} must be sorted by non-decreasing time.`,
+      );
+    }
+    previousTime = keyframe.time;
+  }
 }
 
 function setBoneTimeline(

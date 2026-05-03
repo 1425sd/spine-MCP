@@ -1,0 +1,40 @@
+{
+  "idle": {
+    "duration": 1.2,
+    "bodyTranslateY": 4.2,
+    "headTranslateY": 6
+  },
+  "breathing": {
+    "duration": 1.6,
+    "minScale": 1,
+    "maxScale": 1.03
+  },
+  "blink": {
+    "interval": 2,
+    "closedDuration": 0.12
+  },
+  "tail_wag": {
+    "duration": 1,
+    "minRotation": -12,
+    "maxRotation": 12
+  },
+  "head_bob": {
+    "duration": 1.2,
+    "translateY": 6
+  },
+  "float": {
+    "duration": 2,
+    "translateY": 6
+  },
+  "logo_bounce": {
+    "duration": 1.2,
+    "translateY": 18,
+    "minScale": 0.95,
+    "maxScale": 1.05
+  },
+  "paw_wave": {
+    "duration": 1.2,
+    "minRotation": -15,
+    "maxRotation": 15
+  }
+}

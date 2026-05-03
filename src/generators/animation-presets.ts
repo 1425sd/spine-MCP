@@ -33,7 +33,10 @@ export function resolveAnimationPresets(
 }
 
 export function buildAnimationPresets(params: {
-  request: Pick<BasicAnimationRequest, "animations" | "characterType" | "duration">;
+  request: Pick<
+    BasicAnimationRequest,
+    "animations" | "characterType" | "duration" | "presetParams"
+  >;
   parts: RecommendedPart[];
 }): AnimationPresetBuildResult {
   const selectedAnimations = resolveAnimationPresets(params.request);
@@ -46,6 +49,7 @@ export function buildAnimationPresets(params: {
       preset,
       partIndex,
       durationOverride: params.request.duration,
+      presetParams: params.request.presetParams?.[preset],
       warnings,
     });
 
@@ -65,38 +69,75 @@ function buildPresetAnimation(params: {
   preset: BasicAnimationPresetName;
   partIndex: Map<string, RecommendedPart>;
   durationOverride: number | undefined;
+  presetParams: Record<string, number> | undefined;
   warnings: string[];
 }): unknown | undefined {
   switch (params.preset) {
     case "idle":
-      return buildIdle(params.partIndex, params.durationOverride ?? 1.2);
+      return buildIdle(
+        params.partIndex,
+        params.durationOverride ?? params.presetParams?.duration ?? 1.2,
+        params.presetParams,
+      );
     case "breathing":
-      return buildBreathing(params.partIndex, params.durationOverride ?? 1.6);
+      return buildBreathing(
+        params.partIndex,
+        params.durationOverride ?? params.presetParams?.duration ?? 1.6,
+        params.presetParams,
+      );
     case "blink":
-      return buildBlink(params.partIndex, params.durationOverride ?? 2, params.warnings);
+      return buildBlink(
+        params.partIndex,
+        params.durationOverride ?? params.presetParams?.interval ?? 2,
+        params.presetParams,
+        params.warnings,
+      );
     case "tail_wag":
-      return buildTailWag(params.partIndex, params.durationOverride ?? 1, params.warnings);
+      return buildTailWag(
+        params.partIndex,
+        params.durationOverride ?? params.presetParams?.duration ?? 1,
+        params.presetParams,
+        params.warnings,
+      );
     case "head_bob":
-      return buildHeadBob(params.partIndex, params.durationOverride ?? 1.2);
+      return buildHeadBob(
+        params.partIndex,
+        params.durationOverride ?? params.presetParams?.duration ?? 1.2,
+        params.presetParams,
+      );
     case "float":
-      return buildFloat(params.durationOverride ?? 2);
+      return buildFloat(
+        params.durationOverride ?? params.presetParams?.duration ?? 2,
+        params.presetParams,
+      );
     case "logo_bounce":
-      return buildLogoBounce(params.durationOverride ?? 1.2);
+      return buildLogoBounce(
+        params.durationOverride ?? params.presetParams?.duration ?? 1.2,
+        params.presetParams,
+      );
     case "paw_wave":
-      return buildPawWave(params.partIndex, params.durationOverride ?? 1.2, params.warnings);
+      return buildPawWave(
+        params.partIndex,
+        params.durationOverride ?? params.presetParams?.duration ?? 1.2,
+        params.presetParams,
+        params.warnings,
+      );
   }
 }
 
 function buildIdle(
   partIndex: Map<string, RecommendedPart>,
   duration: number,
+  presetParams: Record<string, number> | undefined,
 ): unknown {
   const half = duration / 2;
+  const bodyTranslateY = presetParams?.bodyTranslateY ?? 4;
+  const headTranslateY = presetParams?.headTranslateY ?? 6;
   const bones: Record<string, unknown> = {
     [partIndex.has("body") ? "body" : "root"]: {
       translate: [
         { time: 0, y: 0 },
-        { time: half, y: 4 },
+        { time: half, y: bodyTranslateY },
         { time: duration, y: 0 },
       ],
     },
@@ -106,7 +147,7 @@ function buildIdle(
     bones.head = {
       translate: [
         { time: 0, y: 0 },
-        { time: half, y: 6 },
+        { time: half, y: headTranslateY },
         { time: duration, y: 0 },
       ],
     };
@@ -118,14 +159,17 @@ function buildIdle(
 function buildBreathing(
   partIndex: Map<string, RecommendedPart>,
   duration: number,
+  presetParams: Record<string, number> | undefined,
 ): unknown {
   const half = duration / 2;
+  const minScale = presetParams?.minScale ?? 1;
+  const maxScale = presetParams?.maxScale ?? 1.03;
   const bones: Record<string, unknown> = {
     [partIndex.has("body") ? "body" : "root"]: {
       scale: [
-        { time: 0, x: 1, y: 1 },
-        { time: half, x: 1.03, y: 1.03 },
-        { time: duration, x: 1, y: 1 },
+        { time: 0, x: minScale, y: minScale },
+        { time: half, x: maxScale, y: maxScale },
+        { time: duration, x: minScale, y: minScale },
       ],
     },
   };
@@ -146,6 +190,7 @@ function buildBreathing(
 function buildBlink(
   partIndex: Map<string, RecommendedPart>,
   duration: number,
+  presetParams: Record<string, number> | undefined,
   warnings: string[],
 ): unknown | undefined {
   const eyeParts = ["eye_left", "eye_right", "eye"]
@@ -157,8 +202,9 @@ function buildBlink(
     return undefined;
   }
 
+  const closedDuration = presetParams?.closedDuration ?? 0.08;
   const closeTime = Math.max(0.05, duration * 0.5);
-  const openTime = Math.min(duration, closeTime + 0.08);
+  const openTime = Math.min(duration, closeTime + closedDuration);
   const slots: Record<string, unknown> = {};
 
   for (const part of eyeParts) {
@@ -178,6 +224,7 @@ function buildBlink(
 function buildTailWag(
   partIndex: Map<string, RecommendedPart>,
   duration: number,
+  presetParams: Record<string, number> | undefined,
   warnings: string[],
 ): unknown | undefined {
   if (!partIndex.has("tail")) {
@@ -185,13 +232,16 @@ function buildTailWag(
     return undefined;
   }
 
+  const minRotation = presetParams?.minRotation ?? -12;
+  const maxRotation = presetParams?.maxRotation ?? 12;
+
   return {
     bones: {
       tail: {
         rotate: [
-          { time: 0, value: -12 },
-          { time: duration / 2, value: 12 },
-          { time: duration, value: -12 },
+          { time: 0, value: minRotation },
+          { time: duration / 2, value: maxRotation },
+          { time: duration, value: minRotation },
         ],
       },
     },
@@ -201,15 +251,17 @@ function buildTailWag(
 function buildHeadBob(
   partIndex: Map<string, RecommendedPart>,
   duration: number,
+  presetParams: Record<string, number> | undefined,
 ): unknown {
   const targetBone = partIndex.has("head") ? "head" : "root";
+  const translateY = presetParams?.translateY ?? 8;
 
   return {
     bones: {
       [targetBone]: {
         translate: [
           { time: 0, y: 0 },
-          { time: duration / 2, y: 8 },
+          { time: duration / 2, y: translateY },
           { time: duration, y: 0 },
         ],
       },
@@ -217,34 +269,46 @@ function buildHeadBob(
   };
 }
 
-function buildFloat(duration: number): unknown {
+function buildFloat(
+  duration: number,
+  presetParams: Record<string, number> | undefined,
+): unknown {
+  const translateY = presetParams?.translateY ?? 6;
+
   return {
     bones: {
       root: {
         translate: [
-          { time: 0, y: -6 },
-          { time: duration / 2, y: 6 },
-          { time: duration, y: -6 },
+          { time: 0, y: -translateY },
+          { time: duration / 2, y: translateY },
+          { time: duration, y: -translateY },
         ],
       },
     },
   };
 }
 
-function buildLogoBounce(duration: number): unknown {
+function buildLogoBounce(
+  duration: number,
+  presetParams: Record<string, number> | undefined,
+): unknown {
+  const translateY = presetParams?.translateY ?? 18;
+  const minScale = presetParams?.minScale ?? 0.98;
+  const maxScale = presetParams?.maxScale ?? 1.05;
+
   return {
     bones: {
       root: {
         translate: [
           { time: 0, y: 0 },
-          { time: duration * 0.35, y: 18 },
+          { time: duration * 0.35, y: translateY },
           { time: duration * 0.65, y: -2 },
           { time: duration, y: 0 },
         ],
         scale: [
           { time: 0, x: 1, y: 1 },
-          { time: duration * 0.35, x: 1.05, y: 0.95 },
-          { time: duration * 0.65, x: 0.98, y: 1.04 },
+          { time: duration * 0.35, x: maxScale, y: 0.95 },
+          { time: duration * 0.65, x: minScale, y: 1.04 },
           { time: duration, x: 1, y: 1 },
         ],
       },
@@ -255,6 +319,7 @@ function buildLogoBounce(duration: number): unknown {
 function buildPawWave(
   partIndex: Map<string, RecommendedPart>,
   duration: number,
+  presetParams: Record<string, number> | undefined,
   warnings: string[],
 ): unknown | undefined {
   const paw =
@@ -265,13 +330,16 @@ function buildPawWave(
     return undefined;
   }
 
+  const minRotation = presetParams?.minRotation ?? -15;
+  const maxRotation = presetParams?.maxRotation ?? 15;
+
   return {
     bones: {
       [paw.boneName]: {
         rotate: [
           { time: 0, value: 0 },
-          { time: duration * 0.25, value: -15 },
-          { time: duration * 0.5, value: 15 },
+          { time: duration * 0.25, value: minRotation },
+          { time: duration * 0.5, value: maxRotation },
           { time: duration * 0.75, value: -10 },
           { time: duration, value: 0 },
         ],

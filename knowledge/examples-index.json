@@ -1,0 +1,1602 @@
+[
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10a\\guaiA10a.json",
+    "animationName": "atk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 690 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10a\\guaiA10a.json",
+    "animationName": "walk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 435 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10b\\guaiA10b.json",
+    "animationName": "atk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 690 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10b\\guaiA10b.json",
+    "animationName": "walk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 435 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10c_1\\guaiA10c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 124 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10c\\guaiA10c.json",
+    "animationName": "atk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 670 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10c\\guaiA10c.json",
+    "animationName": "walk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 425 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10d_1\\guaiA10d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 125 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10d\\guaiA10d.json",
+    "animationName": "atk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 680 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10d\\guaiA10d.json",
+    "animationName": "walk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 453 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10ds_1\\guaiA10ds.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 222 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10ds\\guaiA10ds.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 743 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10e_1\\guaiA10e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 121 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10e\\guaiA10e.json",
+    "animationName": "atk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 690 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10e\\guaiA10e.json",
+    "animationName": "walk",
+    "duration": 1.333,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 435 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10es_1\\guaiA10es.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 224 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA10es\\guaiA10es.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 749 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11a_2\\guaiA11a.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: rotate, scale, shear, translate; loop-friendly; 129 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11a_2\\guaiA11a.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, shear, translate; loop-friendly; 140 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11c_1\\guaiA11c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 97 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11c_2\\guaiA11c.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: rotate, scale, shear, translate; loop-friendly; 324 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11c_2\\guaiA11c.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: rotate, scale, shear, translate; loop-friendly; 318 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11d_1\\guaiA11d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 93 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11d_2\\guaiA11d.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: attachment, color, rotate, scale, shear, translate; loop-friendly; 601 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11d_2\\guaiA11d.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: rotate, scale, shear, translate; loop-friendly; 553 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11ds_2\\guaiA11d.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, scale, shear, translate; loop-friendly; 919 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11ds_2\\guaiA11ds.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, scale, shear, translate; loop-friendly; 919 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11ds\\guaiA11ds.json",
+    "animationName": "skill",
+    "duration": 2.333,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 120 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11e_1\\guaiA11e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 108 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11e_2\\guaiA11e.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: rotate, scale, shear, translate; loop-friendly; 713 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11e_2\\guaiA11e.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: rotate, scale, shear, translate; loop-friendly; 690 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA11es_2\\guaiA11es.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, scale, shear, translate; loop-friendly; 1219 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12a_1\\guaiA12a.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 103 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12a_1\\guaiA12a.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 117 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12a\\guaiA12a.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 103 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12a\\guaiA12a.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 117 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12b_1\\guaiA12b.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 116 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12b_1\\guaiA12b.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 105 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12b\\guaiA12b.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 116 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12b\\guaiA12b.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 105 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12c_1\\guaiA12c.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 123 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12c_1\\guaiA12c.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 129 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12c\\guaiA12c.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 123 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12c\\guaiA12c.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 129 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12d_1\\guaiA12d.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 114 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12d_1\\guaiA12d.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 116 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12d\\guaiA12d.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 114 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12d\\guaiA12d.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 116 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12e_1\\guaiA12e.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 81 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12e_1\\guaiA12e.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 87 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12e\\guaiA12e.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 81 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA12e\\guaiA12e.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 87 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA13b\\guaiA13b.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 54 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA13c\\guaiA13c.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 65 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA13d\\guaiA13d.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 78 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA14ds\\guaiA14ds.json",
+    "animationName": "skill",
+    "duration": 1.733,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 109 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA14es\\guaiA14es.json",
+    "animationName": "skill",
+    "duration": 1.333,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 106 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA15ds\\guaiA15ds.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 234 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA15es\\guaiA15es.json",
+    "animationName": "skill",
+    "duration": 2.833,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 339 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA1c_1\\guaiA1c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 102 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA1d_1\\guaiA1d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 122 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA1e_1\\guaiA1e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 117 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2a\\guaiA2a.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 200 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2a\\guaiA2a.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 182 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2b\\guaiA2b.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 199 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2b\\guaiA2b.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 183 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2c_1\\guaiA2c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 120 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2c\\guaiA2c.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 287 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2c\\guaiA2c.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 273 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2d_1\\guaiA2d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, drawOrder, rotate, translate; loop-friendly; 120 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2d\\guaiA2d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 186 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2d\\guaiA2d.json",
+    "animationName": "walk",
+    "duration": 1.067,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 178 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2ds\\guaiA2ds.json",
+    "animationName": "skill",
+    "duration": 1.967,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 616 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2e_1\\guaiA2e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 141 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2e\\guaiA2e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 200 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2e\\guaiA2e.json",
+    "animationName": "walk",
+    "duration": 1.067,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 178 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA2es\\guaiA2es.json",
+    "animationName": "skill",
+    "duration": 1.967,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 536 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3a\\guaiA3a.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 168 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3a\\guaiA3a.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 180 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3c\\guaiA3c.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 340 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3c\\guaiA3c.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 350 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3d\\guaiA3d.json",
+    "animationName": "atk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 206 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3d\\guaiA3d.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 215 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3ds_1\\guaiA3ds.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 102 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3ds\\guaiA3ds.json",
+    "animationName": "skill",
+    "duration": 1.7,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 754 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3e\\guaiA3e.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 356 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA3es\\guaiA3es.json",
+    "animationName": "skill",
+    "duration": 1.767,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 894 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA4ds_1\\guaiA4ds.json",
+    "animationName": "skill",
+    "duration": 1.033,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 126 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA4ds_2\\guaiA4ds.json",
+    "animationName": "skill",
+    "duration": 1,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 141 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA4ds\\guaiA4ds.json",
+    "animationName": "skill",
+    "duration": 1.033,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 126 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA4es_1\\guaiA4es.json",
+    "animationName": "skill",
+    "duration": 1.033,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 154 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA4es_2\\guaiA4es.json",
+    "animationName": "skill",
+    "duration": 1.167,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 154 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA4es\\guaiA4es.json",
+    "animationName": "skill",
+    "duration": 1.033,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 154 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA5c\\guaiA5c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 93 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA5d\\guaiA5d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 95 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA5e\\guaiA5e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, shear, translate; loop-friendly; 95 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6c_1\\guaiA6c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 105 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6c\\guaiA6c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 105 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6d_1\\guaiA6d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 104 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6d\\guaiA6d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 104 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6ds_1\\guaiA6ds.json",
+    "animationName": "skill",
+    "duration": 1.2,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 126 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6ds\\guaiA6ds.json",
+    "animationName": "skill",
+    "duration": 1.2,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 126 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6e_1\\guaiA6e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 77 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6e\\guaiA6e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 77 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6es_1\\guaiA6es.json",
+    "animationName": "skill",
+    "duration": 1.833,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 98 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA6es\\guaiA6es.json",
+    "animationName": "skill",
+    "duration": 1.833,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 98 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA7ds\\guaiA7ds.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 631 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA7es\\guaiA7es.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 808 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8a\\guaiA8a.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 166 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8a\\guaiA8a.json",
+    "animationName": "walk",
+    "duration": 0.733,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 133 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8b\\guaiA8b.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 166 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8b\\guaiA8b.json",
+    "animationName": "walk",
+    "duration": 0.733,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 136 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8c_1\\guaiA8c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 78 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8c\\guaiA8.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 167 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8c\\guaiA8.json",
+    "animationName": "walk",
+    "duration": 0.733,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 140 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8c\\guaiA8c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 169 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8c\\guaiA8c.json",
+    "animationName": "walk",
+    "duration": 0.733,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 142 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8d_1\\guaiA8d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, drawOrder, rotate, scale, translate; loop-friendly; 77 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8d\\guaiA8d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 192 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8d\\guaiA8d.json",
+    "animationName": "walk",
+    "duration": 1.2,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 221 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8ds_1\\guaiA8ds.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 119 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8ds\\guaiA8ds.json",
+    "animationName": "skill",
+    "duration": 1.167,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 238 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8e_1\\guaiA8e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 74 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8e\\guaiA8e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 192 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8e\\guaiA8e.json",
+    "animationName": "walk",
+    "duration": 1.2,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 221 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8es_1\\guaiA8es.json",
+    "animationName": "skill",
+    "duration": 1.5,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 159 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA8es\\guaiA8es.json",
+    "animationName": "skill",
+    "duration": 1.167,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 228 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9c_1\\guaiA9c.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 56 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9d_1\\guaiA9d.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 59 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9ds_1\\guaiA9ds.json",
+    "animationName": "skill",
+    "duration": 2.333,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 186 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9ds_2\\guaiA9ds.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 132 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9ds\\guaiA9ds.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 132 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9e_1\\guaiA9e.json",
+    "animationName": "atk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 81 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9es_1\\guaiA9es.json",
+    "animationName": "skill",
+    "duration": 2.667,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 183 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9es_2\\guaiA9es.json",
+    "animationName": "skill",
+    "duration": 2.5,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 184 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiA9es\\guaiA9es.json",
+    "animationName": "skill",
+    "duration": 2.5,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 184 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB1ds\\guaiB1ds.json",
+    "animationName": "skill",
+    "duration": 1.1,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 194 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB1es_1\\guaiB1es.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 101 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB1es\\guaiB1es.json",
+    "animationName": "skill",
+    "duration": 1.1,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 195 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB2ds_1\\guaiB2ds.json",
+    "animationName": "skill",
+    "duration": 1.333,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 80 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB3a\\guaiB3a.json",
+    "animationName": "atk",
+    "duration": 1.1,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 117 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB3a\\guaiB3a.json",
+    "animationName": "walk",
+    "duration": 1,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 86 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB3ds\\guaiB3ds.json",
+    "animationName": "skill",
+    "duration": 1.333,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 173 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB3es\\guaiB3es.json",
+    "animationName": "skill",
+    "duration": 1.333,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 168 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4a\\guaiB4a.json",
+    "animationName": "atk",
+    "duration": 1.233,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 144 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4a\\guaiB4a.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 86 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4b\\guaiB4b.json",
+    "animationName": "atk",
+    "duration": 1.2,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 197 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4b\\guaiB4b.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 101 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4c\\guaiB4c.json",
+    "animationName": "atk",
+    "duration": 1.2,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 207 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4c\\guaiB4c.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 103 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4d\\guaiB4d.json",
+    "animationName": "atk",
+    "duration": 0.933,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 245 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4d\\guaiB4d.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 126 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4ds_1\\guaiB4ds.json",
+    "animationName": "skill",
+    "duration": 1.333,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 79 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4ds\\guaiB4ds.json",
+    "animationName": "skill",
+    "duration": 1.233,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 216 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4e\\guaiB4e.json",
+    "animationName": "atk",
+    "duration": 0.933,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 271 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4e\\guaiB4e.json",
+    "animationName": "walk",
+    "duration": 0.667,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 137 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4es_1\\guaiB4es.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 104 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB4es\\guaiB4es.json",
+    "animationName": "skill",
+    "duration": 1.233,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 249 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6a\\guaiB6a.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 111 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6a\\guaiB6a.json",
+    "animationName": "walk",
+    "duration": 1.6,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 189 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6b\\guaiB6b.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 111 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6b\\guaiB6b.json",
+    "animationName": "walk",
+    "duration": 1.6,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 189 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6c\\guaiB6c.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 111 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6c\\guaiB6c.json",
+    "animationName": "walk",
+    "duration": 1.6,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 189 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6d\\guaiB6d.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 111 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6d\\guaiB6d.json",
+    "animationName": "walk",
+    "duration": 1.6,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 189 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6e\\guaiB6e.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 111 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB6e\\guaiB6e.json",
+    "animationName": "walk",
+    "duration": 1.6,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 189 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7a\\guaiB7a.json",
+    "animationName": "atk",
+    "duration": 1.033,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 232 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7a\\guaiB7a.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 129 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7b\\guaiB7b.json",
+    "animationName": "atk",
+    "duration": 1.033,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 259 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7b\\guaiB7b.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 151 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7c\\guaiB7c.json",
+    "animationName": "atk",
+    "duration": 1.033,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 336 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7c\\guaiB7c.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 205 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7d\\guaiB7d.json",
+    "animationName": "atk",
+    "duration": 1.033,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 360 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7d\\guaiB7d.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 211 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7ds\\guaiB7ds.json",
+    "animationName": "skill",
+    "duration": 1.633,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 686 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7e\\guaiB7e.json",
+    "animationName": "atk",
+    "duration": 1.033,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 388 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7e\\guaiB7e.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 241 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB7es\\guaiB7es.json",
+    "animationName": "skill",
+    "duration": 1.633,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 790 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB8ds_1\\guaiB8ds.json",
+    "animationName": "skill",
+    "duration": 2,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 70 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB8ds\\guaiB8ds.json",
+    "animationName": "skill",
+    "duration": 1.5,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 109 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiB8es\\guaiB8es.json",
+    "animationName": "skill",
+    "duration": 1.667,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 165 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1a\\guaiC1a.json",
+    "animationName": "atk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 176 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1a\\guaiC1a.json",
+    "animationName": "walk",
+    "duration": 0.867,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 162 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1b\\guaiC1b.json",
+    "animationName": "atk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 174 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1b\\guaiC1b.json",
+    "animationName": "walk",
+    "duration": 0.867,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 159 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1c_1\\guaiC1c.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 65 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1c\\guaiC1c.json",
+    "animationName": "atk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 175 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1c\\guaiC1c.json",
+    "animationName": "walk",
+    "duration": 0.867,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 159 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1d_1\\guaiC1d.json",
+    "animationName": "atk",
+    "duration": 0.833,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 65 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1d\\guaiC1d.json",
+    "animationName": "atk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 174 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1d\\guaiC1d.json",
+    "animationName": "walk",
+    "duration": 0.867,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 159 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1ds\\guaiC1ds.json",
+    "animationName": "skill",
+    "duration": 1.367,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 364 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1e_1\\guaiC1e.json",
+    "animationName": "atk",
+    "duration": 0.5,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 74 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1e_1\\guaiC1e.json",
+    "animationName": "walk",
+    "duration": 0.8,
+    "notes": "timelines: attachment, rotate, scale, translate; loop-friendly; 102 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1e\\guaiC1e.json",
+    "animationName": "atk",
+    "duration": 0.667,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 174 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "walk",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1e\\guaiC1e.json",
+    "animationName": "walk",
+    "duration": 0.867,
+    "notes": "timelines: attachment, color, rotate, scale, translate; loop-friendly; 150 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1es_1\\guaiC1es.json",
+    "animationName": "skill",
+    "duration": 1.333,
+    "notes": "timelines: attachment, color, rotate, translate; loop-friendly; 138 keyframes",
+    "score": 100
+  },
+  {
+    "animationType": "attack",
+    "projectPath": "G:\\spine-mcp\\spineLearn\\guaiC1es\\guaiC1es.json",
+    "animationName": "skill",
+    "duration": 1.367,
+    "notes": "timelines: color, rotate, scale, translate; loop-friendly; 322 keyframes",
+    "score": 100
+  }
+]

@@ -278,6 +278,98 @@ AI parameter guidance:
 
 `overwrite=false` stops if `outputDir` already exists. `overwrite=true` can overwrite generated files inside `outputDir`, but the server does not delete files outside `outputDir`.
 
+## Spine Corpus Learning Layer
+
+If you have many local Spine source projects, run corpus learning first. This is not large-model training. It is local statistical analysis that extracts patterns from real `.spine` and `.json` projects, then writes markdown and JSON knowledge files that AI tools and MCP tools can read later.
+
+Your source files are not uploaded. The server only reads the corpus directory, exports `.spine` files to local `.cache/corpus-json/` when needed, and writes knowledge files to `knowledge/` or the directory you choose.
+
+The learning layer extracts:
+
+- naming habits for bones, slots, skins, attachments, and animations
+- common skeleton sizes and animation counts
+- common animation names
+- common duration values
+- transform ranges for idle, blink, tail_wag, breathing, float, logo_bounce, and related animations
+- timeline usage such as translate, rotate, scale, attachment, color, drawOrder, and event
+
+Generated files:
+
+```text
+knowledge/learned-spine-guide.md
+knowledge/learned-spine-stats.json
+knowledge/learned-animation-presets.json
+knowledge/learned-naming-rules.json
+knowledge/examples-index.json
+```
+
+### Step 1: Scan Corpus
+
+```text
+使用 spine_scan_corpus:
+corpusDir = G:\spine-corpus
+maxProjects = 20
+```
+
+This only confirms how many `.spine` and `.json` files can be found. It does not parse projects or call Spine CLI.
+
+### Step 2: Learn Corpus
+
+```text
+使用 spine_learn_from_corpus:
+corpusDir = G:\spine-corpus
+outputKnowledgeDir = G:\spine-mcp\knowledge
+maxProjects = 819
+overwrite = true
+```
+
+For `.json` files, MCP parses them directly. For `.spine` files, MCP calls Spine CLI export:
+
+```text
+Spine -i "<project.spine>" -o "G:\spine-mcp\.cache\corpus-json\<project>" -e json
+```
+
+If a project fails to export or parse, it is recorded in `failedProjects` and the batch continues.
+
+### Step 3: Read Guide
+
+```text
+使用 spine_get_generation_guide:
+knowledgeDir = G:\spine-mcp\knowledge
+```
+
+This returns the markdown guide plus machine-readable presets and naming rules. If the files do not exist, it asks you to run `spine_learn_from_corpus`.
+
+### Step 4: Recommend Parameters
+
+```text
+使用 spine_recommend_animation_params:
+userGoal = "做一个可爱的小猫加载动画，身体轻轻呼吸，头上下动，尾巴左右摆，眼睛眨一下"
+characterType = cat
+availableAssetRoles = ["body", "head", "tail", "eye_left", "eye_right"]
+knowledgeDir = G:\spine-mcp\knowledge
+```
+
+This returns recommended animations, duration, learned preset params, warnings, and a short reasoning summary. If knowledge is missing, it falls back to built-in defaults.
+
+### Step 5: Build With Knowledge
+
+```text
+使用 spine_build_basic_animation_with_knowledge:
+assetsDir = G:\cat-assets
+outputDir = G:\cat-output
+projectName = cute_cat_loading
+userGoal = "做一个可爱的小猫加载动画，身体轻轻呼吸，头上下动，尾巴左右摆，眼睛眨一下"
+characterType = cat
+exportMode = json+pack
+openAfterBuild = true
+overwrite = true
+```
+
+This high-level tool reads the knowledge files automatically. It does not depend on the AI remembering to call `spine_get_generation_guide` first. If knowledge files are missing, it returns a warning and continues with second-version defaults.
+
+The generated result is still a basic region-attachment animation. High-quality animation may still need manual adjustment in Spine.
+
 ## Development
 
 ```powershell

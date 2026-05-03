@@ -1,0 +1,743 @@
+{
+  "projectCount": 821,
+  "failedProjectCount": 0,
+  "commonSpineVersions": [
+    {
+      "name": "3.5.51",
+      "count": 472
+    },
+    {
+      "name": "3.6.52",
+      "count": 209
+    },
+    {
+      "name": "3.6.51",
+      "count": 140
+    }
+  ],
+  "averageBones": 28.492,
+  "averageSlots": 15.292,
+  "averageAnimations": 3.9,
+  "commonBoneNames": [
+    {
+      "name": "root",
+      "count": 821
+    },
+    {
+      "name": "scale",
+      "count": 821
+    },
+    {
+      "name": "jifei",
+      "count": 816
+    },
+    {
+      "name": "bone",
+      "count": 363
+    },
+    {
+      "name": "tou",
+      "count": 335
+    },
+    {
+      "name": "bone2",
+      "count": 297
+    },
+    {
+      "name": "head",
+      "count": 280
+    },
+    {
+      "name": "shenti",
+      "count": 271
+    },
+    {
+      "name": "bone3",
+      "count": 260
+    },
+    {
+      "name": "bone4",
+      "count": 223
+    },
+    {
+      "name": "IK1",
+      "count": 218
+    },
+    {
+      "name": "IK2",
+      "count": 210
+    },
+    {
+      "name": "body",
+      "count": 186
+    },
+    {
+      "name": "bone5",
+      "count": 183
+    },
+    {
+      "name": "bone6",
+      "count": 153
+    },
+    {
+      "name": "body2",
+      "count": 152
+    },
+    {
+      "name": "tui2",
+      "count": 146
+    },
+    {
+      "name": "body1",
+      "count": 145
+    },
+    {
+      "name": "tui1",
+      "count": 138
+    },
+    {
+      "name": "bone7",
+      "count": 135
+    },
+    {
+      "name": "legL1",
+      "count": 125
+    },
+    {
+      "name": "legR1",
+      "count": 125
+    },
+    {
+      "name": "legL2",
+      "count": 123
+    },
+    {
+      "name": "legR2",
+      "count": 121
+    },
+    {
+      "name": "bone8",
+      "count": 120
+    },
+    {
+      "name": "armR1",
+      "count": 118
+    },
+    {
+      "name": "armR2",
+      "count": 118
+    },
+    {
+      "name": "armL1",
+      "count": 116
+    },
+    {
+      "name": "armL2",
+      "count": 111
+    },
+    {
+      "name": "texiao1",
+      "count": 109
+    },
+    {
+      "name": "wuqi",
+      "count": 107
+    },
+    {
+      "name": "armL",
+      "count": 106
+    },
+    {
+      "name": "bone9",
+      "count": 106
+    },
+    {
+      "name": "footL",
+      "count": 106
+    },
+    {
+      "name": "footR",
+      "count": 106
+    },
+    {
+      "name": "texiao2",
+      "count": 104
+    },
+    {
+      "name": "bi1",
+      "count": 99
+    },
+    {
+      "name": "shenti2",
+      "count": 98
+    },
+    {
+      "name": "shou1",
+      "count": 97
+    },
+    {
+      "name": "bi2",
+      "count": 96
+    },
+    {
+      "name": "armR",
+      "count": 93
+    },
+    {
+      "name": "bone10",
+      "count": 93
+    },
+    {
+      "name": "jiao2",
+      "count": 91
+    },
+    {
+      "name": "xiaba",
+      "count": 91
+    },
+    {
+      "name": "jiao1",
+      "count": 89
+    },
+    {
+      "name": "texiao",
+      "count": 88
+    },
+    {
+      "name": "handL",
+      "count": 85
+    },
+    {
+      "name": "yan",
+      "count": 85
+    },
+    {
+      "name": "tail1",
+      "count": 84
+    },
+    {
+      "name": "tail2",
+      "count": 83
+    }
+  ],
+  "commonSlotNames": [
+    {
+      "name": "tou",
+      "count": 336
+    },
+    {
+      "name": "body",
+      "count": 304
+    },
+    {
+      "name": "shenti",
+      "count": 273
+    },
+    {
+      "name": "head",
+      "count": 217
+    },
+    {
+      "name": "tui2",
+      "count": 142
+    },
+    {
+      "name": "tui1",
+      "count": 140
+    },
+    {
+      "name": "armL",
+      "count": 125
+    },
+    {
+      "name": "armR",
+      "count": 125
+    },
+    {
+      "name": "atkbox",
+      "count": 117
+    },
+    {
+      "name": "wuqi",
+      "count": 114
+    },
+    {
+      "name": "bi1",
+      "count": 101
+    },
+    {
+      "name": "bi2",
+      "count": 98
+    },
+    {
+      "name": "legL",
+      "count": 98
+    },
+    {
+      "name": "legR",
+      "count": 98
+    },
+    {
+      "name": "shou1",
+      "count": 97
+    },
+    {
+      "name": "jiao1",
+      "count": 91
+    },
+    {
+      "name": "xiaba",
+      "count": 91
+    },
+    {
+      "name": "jiao2",
+      "count": 86
+    },
+    {
+      "name": "yan",
+      "count": 83
+    },
+    {
+      "name": "shou2",
+      "count": 82
+    },
+    {
+      "name": "tail",
+      "count": 64
+    },
+    {
+      "name": "footL",
+      "count": 60
+    },
+    {
+      "name": "footR",
+      "count": 60
+    },
+    {
+      "name": "handL",
+      "count": 60
+    },
+    {
+      "name": "handR",
+      "count": 60
+    },
+    {
+      "name": "armL1",
+      "count": 53
+    },
+    {
+      "name": "armL2",
+      "count": 53
+    },
+    {
+      "name": "armR1",
+      "count": 53
+    },
+    {
+      "name": "armR2",
+      "count": 53
+    },
+    {
+      "name": "xiaotui1",
+      "count": 51
+    },
+    {
+      "name": "xiaotui2",
+      "count": 51
+    },
+    {
+      "name": "mouth",
+      "count": 49
+    },
+    {
+      "name": "datui1",
+      "count": 47
+    },
+    {
+      "name": "datui2",
+      "count": 47
+    },
+    {
+      "name": "she",
+      "count": 47
+    },
+    {
+      "name": "zui",
+      "count": 47
+    },
+    {
+      "name": "chibang2",
+      "count": 46
+    },
+    {
+      "name": "weapon",
+      "count": 46
+    },
+    {
+      "name": "er2",
+      "count": 45
+    },
+    {
+      "name": "weiba",
+      "count": 45
+    },
+    {
+      "name": "jian1",
+      "count": 43
+    },
+    {
+      "name": "wingL",
+      "count": 43
+    },
+    {
+      "name": "wingR",
+      "count": 43
+    },
+    {
+      "name": "er1",
+      "count": 39
+    },
+    {
+      "name": "earL",
+      "count": 35
+    },
+    {
+      "name": "earR",
+      "count": 35
+    },
+    {
+      "name": "legL1",
+      "count": 35
+    },
+    {
+      "name": "legR1",
+      "count": 35
+    },
+    {
+      "name": "shangbi1",
+      "count": 35
+    },
+    {
+      "name": "hair",
+      "count": 34
+    }
+  ],
+  "commonAnimationNames": [
+    {
+      "name": "atk",
+      "count": 586
+    },
+    {
+      "name": "std",
+      "count": 586
+    },
+    {
+      "name": "std2",
+      "count": 586
+    },
+    {
+      "name": "walk",
+      "count": 586
+    },
+    {
+      "name": "jifei",
+      "count": 584
+    },
+    {
+      "name": "skill",
+      "count": 235
+    },
+    {
+      "name": "ts",
+      "count": 19
+    },
+    {
+      "name": "gd",
+      "count": 10
+    },
+    {
+      "name": "atk1",
+      "count": 6
+    },
+    {
+      "name": "jife",
+      "count": 2
+    },
+    {
+      "name": "skill2",
+      "count": 2
+    }
+  ],
+  "durationStatsByAnimationType": {
+    "attack": {
+      "count": 829,
+      "min": 0.333,
+      "max": 3.167,
+      "average": 1.139,
+      "median": 1,
+      "p25": 0.833,
+      "p75": 1.333
+    },
+    "unknown": {
+      "count": 1787,
+      "min": 0.2,
+      "max": 2,
+      "average": 0.847,
+      "median": 1,
+      "p25": 0.267,
+      "p75": 1.167
+    },
+    "walk": {
+      "count": 586,
+      "min": 0.5,
+      "max": 2,
+      "average": 1.011,
+      "median": 1,
+      "p25": 0.8,
+      "p75": 1.067
+    }
+  },
+  "transformRangeStatsByAnimationType": {
+    "attack": {
+      "rotateAbsMax": {
+        "count": 828,
+        "min": 7.36,
+        "max": 729,
+        "average": 269.657,
+        "median": 328.935,
+        "p25": 150,
+        "p75": 354
+      },
+      "translateXAbsMax": {
+        "count": 828,
+        "min": 0,
+        "max": 1990.98,
+        "average": 112.532,
+        "median": 30,
+        "p25": 10.86,
+        "p75": 91.248
+      },
+      "translateYAbsMax": {
+        "count": 828,
+        "min": 0,
+        "max": 2982.05,
+        "average": 128.12,
+        "median": 23.825,
+        "p25": 9.355,
+        "p75": 106.127
+      },
+      "scaleDeltaMax": {
+        "count": 524,
+        "min": 0,
+        "max": 9.055,
+        "average": 0.891,
+        "median": 0.5,
+        "p25": 0.206,
+        "p75": 1.011
+      },
+      "keyframeCount": {
+        "count": 829,
+        "min": 16,
+        "max": 1324,
+        "average": 167.441,
+        "median": 105,
+        "p25": 67,
+        "p75": 183
+      }
+    },
+    "unknown": {
+      "rotateAbsMax": {
+        "count": 1738,
+        "min": 0,
+        "max": 393,
+        "average": 183.849,
+        "median": 161.76,
+        "p25": 25.25,
+        "p75": 352.83
+      },
+      "translateXAbsMax": {
+        "count": 1314,
+        "min": 0,
+        "max": 1324.68,
+        "average": 16.913,
+        "median": 2.17,
+        "p25": 0,
+        "p75": 6.36
+      },
+      "translateYAbsMax": {
+        "count": 1314,
+        "min": 0,
+        "max": 438.35,
+        "average": 15.599,
+        "median": 4.17,
+        "p25": 2,
+        "p75": 8.76
+      },
+      "scaleDeltaMax": {
+        "count": 1057,
+        "min": 0,
+        "max": 5.952,
+        "average": 0.456,
+        "median": 0.412,
+        "p25": 0.186,
+        "p75": 0.56
+      },
+      "keyframeCount": {
+        "count": 1787,
+        "min": 2,
+        "max": 712,
+        "average": 71.076,
+        "median": 39,
+        "p25": 5,
+        "p75": 84
+      }
+    },
+    "walk": {
+      "rotateAbsMax": {
+        "count": 584,
+        "min": 1.92,
+        "max": 393,
+        "average": 229.639,
+        "median": 317.94,
+        "p25": 48,
+        "p75": 346.2
+      },
+      "translateXAbsMax": {
+        "count": 586,
+        "min": 0,
+        "max": 1324.68,
+        "average": 34.531,
+        "median": 21.135,
+        "p25": 5.685,
+        "p75": 41.947
+      },
+      "translateYAbsMax": {
+        "count": 586,
+        "min": 0.04,
+        "max": 438.35,
+        "average": 29.138,
+        "median": 17.015,
+        "p25": 8,
+        "p75": 34.398
+      },
+      "scaleDeltaMax": {
+        "count": 334,
+        "min": 0,
+        "max": 5.952,
+        "average": 0.421,
+        "median": 0.2,
+        "p25": 0.03,
+        "p75": 0.456
+      },
+      "keyframeCount": {
+        "count": 586,
+        "min": 6,
+        "max": 719,
+        "average": 113.109,
+        "median": 74,
+        "p25": 46.25,
+        "p75": 127
+      }
+    }
+  },
+  "timelineUsageStats": [
+    {
+      "name": "rotate",
+      "count": 3150
+    },
+    {
+      "name": "translate",
+      "count": 2728
+    },
+    {
+      "name": "scale",
+      "count": 1915
+    },
+    {
+      "name": "attachment",
+      "count": 845
+    },
+    {
+      "name": "color",
+      "count": 593
+    },
+    {
+      "name": "shear",
+      "count": 136
+    },
+    {
+      "name": "drawOrder",
+      "count": 77
+    },
+    {
+      "name": "event",
+      "count": 12
+    }
+  ],
+  "namingConventionStats": {
+    "leftRightPrefixes": [
+      {
+        "name": "left/right",
+        "count": 505
+      },
+      {
+        "name": "l/r",
+        "count": 4
+      }
+    ],
+    "commonBodyPartNames": [
+      {
+        "name": "leg",
+        "count": 1640
+      },
+      {
+        "name": "arm",
+        "count": 1341
+      },
+      {
+        "name": "body",
+        "count": 940
+      },
+      {
+        "name": "foot",
+        "count": 863
+      },
+      {
+        "name": "root",
+        "count": 825
+      },
+      {
+        "name": "wing",
+        "count": 776
+      },
+      {
+        "name": "hand",
+        "count": 657
+      },
+      {
+        "name": "head",
+        "count": 546
+      },
+      {
+        "name": "tail",
+        "count": 402
+      },
+      {
+        "name": "ear",
+        "count": 196
+      },
+      {
+        "name": "mouth",
+        "count": 180
+      },
+      {
+        "name": "eye",
+        "count": 90
+      }
+    ],
+    "leftRightConvention": "left/right",
+    "attachmentNaming": "Use short semantic attachment names without .png extension.",
+    "imagePathNaming": "Use image paths matching attachment names without file extensions."
+  },
+  "failedProjects": []
+}

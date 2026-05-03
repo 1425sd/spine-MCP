@@ -1,7 +1,9 @@
 node_modules/
 build/
 .claude/
+.cache/
 tmp-v2-smoke-*/
+spineLearn/
 怪物spine/
 
 *.log

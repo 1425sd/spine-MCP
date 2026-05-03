@@ -24,6 +24,15 @@ Allowed second-version scope:
 - Import generated JSON through Spine CLI.
 - Export generated .spine projects through Spine CLI.
 
+Allowed third-version scope:
+- Scan local Spine corpora for .spine and .json files.
+- Export .spine files to .cache/corpus-json for analysis.
+- Parse exported or existing Spine JSON files one project at a time.
+- Extract naming, skeleton, attachment, timeline, duration, and transform statistics.
+- Write learned guide and machine-readable JSON knowledge files under knowledge/ or a user-provided outputKnowledgeDir.
+- Use learned presets and naming rules to recommend basic generator parameters.
+- Fall back to built-in defaults when knowledge files are missing.
+
 Out of scope:
 - UI automation.
 - AutoHotkey.
@@ -33,6 +42,7 @@ Out of scope:
 - Bone weight editing.
 - Direct mutation of internal .spine project structure.
 - Arbitrary shell command execution.
+- Modifying or deleting corpus source files.
 `;
 
 export function registerSpineRulesResource(server: McpServer): void {

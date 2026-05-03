@@ -1,0 +1,10 @@
+node_modules/
+build/
+.claude/
+tmp-v2-smoke-*/
+怪物spine/
+
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,30 @@
+{
+  "name": "spine-mcp",
+  "version": "0.1.0",
+  "description": "Local MCP server for automating Spine via the official Spine CLI.",
+  "type": "module",
+  "private": true,
+  "main": "build/index.js",
+  "bin": {
+    "spine-mcp": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node build/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.24.0",
+    "image-size": "^2.0.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

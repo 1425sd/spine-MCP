@@ -1,5 +1,9 @@
 # spine-mcp
 
+English | [简体中文](README.zh-CN.md)
+
+GitHub shows this English `README.md` by default. The Chinese version is maintained in `README.zh-CN.md`.
+
 Local MCP server for Spine automation on Windows. It only calls the official Spine CLI and communicates over stdio, so AI tools like Claude Code, Codex, and Cursor can start it locally.
 
 This server does not do UI automation, AutoHotkey, mouse or keyboard simulation, timeline operations, mesh binding, bone weight editing, or direct `.spine` internals modification. It only modifies `.spine` files through the official Spine CLI.
@@ -8,10 +12,28 @@ This server does not do UI automation, AutoHotkey, mouse or keyboard simulation,
 
 - Windows
 - Node.js 20+
-- Spine installed locally
+- Spine installed locally. This MCP does not include Spine and cannot run without a local Spine installation.
 - A Spine CLI executable available as either:
   - `SPINE_EXE`, preferably pointing to `Spine.com`
   - or a `Spine` command available on `PATH`
+
+## Spine Version Compatibility
+
+This MCP package is version `0.1.0`.
+
+The Spine CLI command construction in this project has been checked against local Spine Pro / Spine Launcher `3.8.75`. In particular, Spine `3.8.75` requires export commands to use an export settings JSON file:
+
+```text
+Spine -i "<project.spine>" -o "<outputDir>" -e "<export-settings.json>"
+```
+
+If a command fails even though the input paths are correct, first check whether your local Spine version has different CLI flags or export behavior. Run:
+
+```powershell
+& "$env:SPINE_EXE" --help
+```
+
+Then compare the output with the command shown by the MCP result. Different Spine versions may require different export settings JSON formats, support different flags, or reject commands that work in `3.8.75`.
 
 ## Install
 
@@ -22,7 +44,7 @@ npm.cmd install
 
 ## Configure Spine
 
-Recommended: point `SPINE_EXE` to `Spine.com`.
+Recommended: point `SPINE_EXE` to your local `Spine.com`. The example below is the default install style, but use the actual path for your own Spine installation.
 
 ```powershell
 $env:SPINE_EXE = "C:\Program Files\Spine\Spine.com"
@@ -32,6 +54,12 @@ Example for a custom local install path:
 
 ```powershell
 $env:SPINE_EXE = "E:\BaiduNetdiskDownload\Spine pro 3.8.75+K'D\Spine.com"
+```
+
+Confirm the CLI is reachable and note the version:
+
+```powershell
+& "$env:SPINE_EXE" --help
 ```
 
 To persist it for future PowerShell sessions:
@@ -282,7 +310,7 @@ Your source files are not uploaded. The server only reads the corpus directory, 
 ### Step 1: Scan Corpus
 
 ```text
-使用 spine_scan_corpus:
+Use spine_scan_corpus:
 corpusDir = G:\spine-corpus
 maxProjects = 20
 ```
@@ -292,7 +320,7 @@ This only confirms how many `.spine` and `.json` files can be found. It does not
 ### Step 2: Learn Corpus
 
 ```text
-使用 spine_learn_from_corpus:
+Use spine_learn_from_corpus:
 corpusDir = G:\spine-corpus
 outputKnowledgeDir = G:\spine-mcp\knowledge
 exportSettingsPath = G:\spine-corpus\json-export-settings.json
@@ -313,7 +341,7 @@ If a project fails to export or parse, it is recorded in `failedProjects` and th
 ### Step 3: Read Guide
 
 ```text
-使用 spine_get_generation_guide:
+Use spine_get_generation_guide:
 knowledgeDir = G:\spine-mcp\knowledge
 ```
 
@@ -322,8 +350,8 @@ This returns the markdown guide plus machine-readable presets and naming rules. 
 ### Step 4: Recommend Parameters
 
 ```text
-使用 spine_recommend_animation_params:
-userGoal = "做一个可爱的小猫加载动画，身体轻轻呼吸，头上下动，尾巴左右摆，眼睛眨一下"
+Use spine_recommend_animation_params:
+userGoal = "Make a cute cat loading animation with breathing, head bob, tail swing, and blinking."
 characterType = cat
 availableAssetRoles = ["body", "head", "tail", "eye_left", "eye_right"]
 knowledgeDir = G:\spine-mcp\knowledge

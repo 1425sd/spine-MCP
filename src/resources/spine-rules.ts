@@ -41,6 +41,15 @@ Allowed existing-project animation scope:
 - Import the modified JSON copy into a new .spine project through Spine CLI.
 - Export that generated .spine project through Spine CLI.
 
+Allowed fourth-version JSON animation editing scope:
+- Read Spine JSON files and inspect skeleton, bones, slots, skins, attachments, and animations.
+- Infer common JSON roles such as body, head, tail, eyes, paws, root, and logo.
+- Write modified JSON copies with basic rotate, translate, scale, and slot attachment timelines.
+- Preserve source JSON files and write generated output only to user-specified output JSON paths or outputDir.
+- Import generated JSON copies through Spine CLI.
+- Pack user-provided image folders through Spine CLI.
+- Export generated .spine projects through Spine CLI.
+
 Out of scope:
 - UI automation.
 - AutoHotkey.

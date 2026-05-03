@@ -3,12 +3,16 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { registerSpineRulesResource } from "./resources/spine-rules.js";
 import { registerSpineAnalyzeAssetsTool } from "./tools/spine-analyze-assets.js";
+import { registerSpineAnalyzeJsonTool } from "./tools/spine-analyze-json.js";
+import { registerSpineAddSimpleAnimationTool } from "./tools/spine-add-simple-animation.js";
 import { registerSpineBuildAnimationFromExistingProjectTool } from "./tools/spine-build-animation-from-existing-project.js";
+import { registerSpineBuildAnimationFromJsonTool } from "./tools/spine-build-animation-from-json.js";
 import { registerSpineBuildBasicAnimationWithKnowledgeTool } from "./tools/spine-build-basic-animation-with-knowledge.js";
 import { registerSpineBuildBasicAnimationTool } from "./tools/spine-build-basic-animation.js";
 import { registerSpineCleanTool } from "./tools/spine-clean.js";
 import { registerSpineExportTool } from "./tools/spine-export.js";
 import { registerSpineGenerateSimpleSkeletonJsonTool } from "./tools/spine-generate-simple-skeleton-json.js";
+import { registerSpineGenerateAnimationJsonTool } from "./tools/spine-generate-animation-json.js";
 import { registerSpineGetGenerationGuideTool } from "./tools/spine-get-generation-guide.js";
 import { registerSpineLearnFromCorpusTool } from "./tools/spine-learn-from-corpus.js";
 import { registerSpineImportGeneratedJsonTool } from "./tools/spine-import-generated-json.js";
@@ -20,6 +24,38 @@ import { registerSpineRecommendAnimationParamsTool } from "./tools/spine-recomme
 import { registerSpineScanCorpusTool } from "./tools/spine-scan-corpus.js";
 import { registerSpineValidateAssetsTool } from "./tools/spine-validate-assets.js";
 import { registerSpineValidateGeneratedJsonTool } from "./tools/spine-validate-generated-json.js";
+import { registerSpineCreateLoadingAnimationPresetTool } from "./tools/spine-create-loading-animation-preset.js";
+
+interface ToolRegistration {
+  name: string;
+  register: (server: McpServer) => void;
+}
+
+const toolRegistrations: ToolRegistration[] = [
+  { name: "spine_info", register: registerSpineInfoTool },
+  { name: "spine_export", register: registerSpineExportTool },
+  { name: "spine_pack_textures", register: registerSpinePackTool },
+  { name: "spine_import_json", register: registerSpineImportJsonTool },
+  { name: "spine_clean", register: registerSpineCleanTool },
+  { name: "spine_open_project", register: registerSpineOpenProjectTool },
+  { name: "spine_validate_assets", register: registerSpineValidateAssetsTool },
+  { name: "spine_analyze_assets", register: registerSpineAnalyzeAssetsTool },
+  { name: "spine_analyze_json", register: registerSpineAnalyzeJsonTool },
+  { name: "spine_generate_simple_skeleton_json", register: registerSpineGenerateSimpleSkeletonJsonTool },
+  { name: "spine_generate_animation_json", register: registerSpineGenerateAnimationJsonTool },
+  { name: "spine_add_simple_animation", register: registerSpineAddSimpleAnimationTool },
+  { name: "spine_validate_generated_json", register: registerSpineValidateGeneratedJsonTool },
+  { name: "spine_import_generated_json", register: registerSpineImportGeneratedJsonTool },
+  { name: "spine_build_basic_animation", register: registerSpineBuildBasicAnimationTool },
+  { name: "spine_scan_corpus", register: registerSpineScanCorpusTool },
+  { name: "spine_learn_from_corpus", register: registerSpineLearnFromCorpusTool },
+  { name: "spine_get_generation_guide", register: registerSpineGetGenerationGuideTool },
+  { name: "spine_recommend_animation_params", register: registerSpineRecommendAnimationParamsTool },
+  { name: "spine_build_basic_animation_with_knowledge", register: registerSpineBuildBasicAnimationWithKnowledgeTool },
+  { name: "spine_build_animation_from_existing_project", register: registerSpineBuildAnimationFromExistingProjectTool },
+  { name: "spine_build_animation_from_json", register: registerSpineBuildAnimationFromJsonTool },
+  { name: "spine_create_loading_animation_preset", register: registerSpineCreateLoadingAnimationPresetTool },
+];
 
 const server = new McpServer({
   name: "spine-mcp",
@@ -27,24 +63,23 @@ const server = new McpServer({
 });
 
 registerSpineRulesResource(server);
-registerSpineInfoTool(server);
-registerSpineExportTool(server);
-registerSpinePackTool(server);
-registerSpineImportJsonTool(server);
-registerSpineCleanTool(server);
-registerSpineOpenProjectTool(server);
-registerSpineValidateAssetsTool(server);
-registerSpineAnalyzeAssetsTool(server);
-registerSpineGenerateSimpleSkeletonJsonTool(server);
-registerSpineValidateGeneratedJsonTool(server);
-registerSpineImportGeneratedJsonTool(server);
-registerSpineBuildBasicAnimationTool(server);
-registerSpineScanCorpusTool(server);
-registerSpineLearnFromCorpusTool(server);
-registerSpineGetGenerationGuideTool(server);
-registerSpineRecommendAnimationParamsTool(server);
-registerSpineBuildBasicAnimationWithKnowledgeTool(server);
-registerSpineBuildAnimationFromExistingProjectTool(server);
+
+let registeredCount = 0;
+const registeredNames: string[] = [];
+
+for (const tool of toolRegistrations) {
+  try {
+    tool.register(server);
+    registeredCount++;
+    registeredNames.push(tool.name);
+  } catch (error) {
+    console.error(`[spine-mcp] Failed to register tool "${tool.name}":`, error);
+  }
+}
+
+console.error(`[spine-mcp] Registering ${toolRegistrations.length} tools...`);
+console.error(`[spine-mcp] Successfully registered ${registeredCount}/${toolRegistrations.length} tools`);
+console.error(`[spine-mcp] Tools: ${registeredNames.join(", ")}`);
 
 const transport = new StdioServerTransport();
 

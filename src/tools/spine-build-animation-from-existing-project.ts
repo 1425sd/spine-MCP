@@ -12,7 +12,7 @@ import {
   loadKnowledge,
   recommendAnimationParams,
 } from "../corpus/knowledge-loader.js";
-import { formatJson, textContent } from "./common.js";
+import { formatJson, textContent, validateExportSettingsPath } from "./common.js";
 import {
   characterTypeSchema,
   exportModeSchema,
@@ -78,7 +78,7 @@ const schema = {
 export function registerSpineBuildAnimationFromExistingProjectTool(server: McpServer): void {
   server.tool(
     "spine_build_animation_from_existing_project",
-    "Build simple animation keyframes on top of an existing Spine JSON or .spine project. Use this for Photoshop to Spine exported JSON plus an images folder, or for an existing .spine project that should receive basic idle, breathing, blink, tail_wag, head_bob, float, logo_bounce, or paw_wave animations based on userGoal and learned corpus presets. It writes only to outputDir, imports the generated JSON into a new .spine project, exports json+atlas+png or the requested export mode, and can open the result. Do not use it for mesh binding, IK, weights, complex curve editing, UI automation, mouse/keyboard simulation, or direct .spine binary modification. If neither sourceJsonPath nor spineProjectPath is provided, it returns a clear error.",
+    "Build simple animation keyframes on an existing Spine JSON or .spine project. Writes to outputDir, imports into .spine, exports, and can open the result. Requires sourceJsonPath or spineProjectPath. Not for mesh, IK, weights, or UI automation.",
     schema,
     async (request) => {
       let failedAt:
@@ -145,6 +145,22 @@ export function registerSpineBuildAnimationFromExistingProjectTool(server: McpSe
           namingRules: knowledge.namingRules,
         });
         warnings.push(...recommendation.warnings);
+
+        const settingsCheck = await validateExportSettingsPath(request.exportMode, "spine_build_animation_from_existing_project");
+        if (!settingsCheck.valid) {
+          failedAt = "export";
+          return textContent(
+            formatJson({
+              success: false,
+              failedAt,
+              error: settingsCheck.error,
+              knowledgeFound: knowledge.exists,
+              knowledgeDir: knowledge.knowledgeDir,
+              recommendation,
+              warnings: dedupe(warnings),
+            }),
+          );
+        }
 
         failedAt = "generate_json";
         const buildResult = await buildPreparedExistingProjectAnimation({

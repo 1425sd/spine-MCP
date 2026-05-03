@@ -13,7 +13,7 @@ export interface BasicAnimationRequest {
   duration?: number;
   animations?: BasicAnimationPresetName[];
   presetParams?: Partial<Record<BasicAnimationPresetName, Record<string, number>>>;
-  exportMode?: "json" | "json+pack" | "binary" | "binary+pack";
+  exportMode?: string;
   openAfterBuild?: boolean;
   overwrite?: boolean;
 }

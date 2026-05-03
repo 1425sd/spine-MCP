@@ -1,7 +1,9 @@
+import { stat } from "node:fs/promises";
+import path from "node:path";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { runSpine } from "../services/spine-cli.js";
-import { formatToolError, textContent } from "./common.js";
+import { formatJson, formatToolError, textContent } from "./common.js";
 
 const schema = {
   projectPath: z
@@ -17,16 +19,41 @@ export function registerSpineOpenProjectTool(server: McpServer): void {
     schema,
     async ({ projectPath }) => {
       try {
+        if (!projectPath.toLowerCase().endsWith(".spine")) {
+          return textContent(
+            formatJson({
+              success: false,
+              error: `spine_open_project only accepts .spine project files. Received: ${path.basename(projectPath)}`,
+            }),
+          );
+        }
+
+        try {
+          const info = await stat(projectPath);
+          if (!info.isFile()) {
+            return textContent(
+              formatJson({
+                success: false,
+                error: `Path is not a file: ${projectPath}`,
+              }),
+            );
+          }
+        } catch {
+          return textContent(
+            formatJson({
+              success: false,
+              error: `File does not exist: ${projectPath}`,
+            }),
+          );
+        }
+
         const result = await runSpine([projectPath], { waitForExit: false });
         return textContent(
-          JSON.stringify(
-            {
-              message: "已尝试打开项目。",
-              ...result,
-            },
-            null,
-            2,
-          ),
+          formatJson({
+            message:
+              "The editor launch was requested. Please confirm manually in Spine.",
+            ...result,
+          }),
         );
       } catch (error) {
         return textContent(formatToolError(error));

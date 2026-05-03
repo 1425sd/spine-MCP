@@ -12,7 +12,8 @@
     "build": "tsc -p tsconfig.json",
     "start": "node build/index.js",
     "dev": "tsx src/index.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "smoke:mcp": "node scripts/smoke-list-tools.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.24.0",

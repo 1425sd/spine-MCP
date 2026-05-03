@@ -17,9 +17,10 @@ export const characterTypeSchema = z
   .describe("Character category used to choose default layout and animation presets.");
 
 export const exportModeSchema = z
-  .enum(["json", "json+pack", "binary", "binary+pack"])
-  .default("json+pack")
-  .describe('Spine export mode passed to -e, for example "json+pack".');
+  .string()
+  .min(1)
+  .optional()
+  .describe('Spine export settings JSON file path. Mode strings like "json+pack" are not accepted - provide a real .json export settings file, or omit to use Spine defaults.');
 
 export const projectNameSchema = z
   .string()

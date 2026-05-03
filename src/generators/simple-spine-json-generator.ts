@@ -108,7 +108,7 @@ export function normalizeGenerationRequest(
     canvasWidth: request.canvasWidth ?? 512,
     canvasHeight: request.canvasHeight ?? 512,
     fps: request.fps ?? 30,
-    exportMode: request.exportMode ?? "json+pack",
+    exportMode: request.exportMode,
     animations: resolveAnimationPresets(request),
   };
 }

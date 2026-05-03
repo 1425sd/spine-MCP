@@ -5,7 +5,7 @@ import { analyzeAssets } from "../services/asset-analyzer.js";
 import { createExportOutputDir } from "../services/generated-project-service.js";
 import { runSpine } from "../services/spine-cli.js";
 import { validateGeneratedSpineJson } from "../services/spine-json-validator.js";
-import { formatJson, formatToolError, textContent } from "./common.js";
+import { formatJson, formatToolError, textContent, validateExportSettingsPath } from "./common.js";
 import {
   animationsSchema,
   canvasHeightSchema,
@@ -54,7 +54,7 @@ const schema = {
 export function registerSpineBuildBasicAnimationTool(server: McpServer): void {
   server.tool(
     "spine_build_basic_animation",
-    "High-level Text-to-Spine Basic Generator. Use this for simple region PNG part animations such as a small cat idle loading animation, logo bounce, mascot idle, breathing, blink, tail wag, float, head bob, or paw wave. If the user says small cat idle loading, pass characterType=\"cat\" and animations=[\"idle\",\"breathing\",\"blink\",\"tail_wag\"]. If the user says logo bounce, pass characterType=\"logo\" and animations=[\"logo_bounce\"]. If the user says floating, add \"float\". If the user says blink, add \"blink\". If the user says tail wag, add \"tail_wag\". If animations are omitted, defaults are cat -> idle/breathing/blink/tail_wag, logo -> logo_bounce/float, generic -> idle. This tool can handle a single PNG for logo_bounce or float and returns warnings for incomplete assets. Do not use it for professional mesh, IK, weights, complex skins, timeline UI editing, mouse/keyboard automation, or direct .spine binary modification.",
+    "High-level Text-to-Spine generator for simple region PNG animations. Supports idle, breathing, blink, tail_wag, head_bob, float, logo_bounce, paw_wave. Defaults: cat->idle/breathing/blink/tail_wag, logo->logo_bounce/float, generic->idle. Not for mesh, IK, weights, or UI automation.",
     schema,
     async (request) => {
       let failedAt:
@@ -121,15 +121,26 @@ export function registerSpineBuildBasicAnimationTool(server: McpServer): void {
         }
 
         failedAt = "export";
+        const settingsCheck = await validateExportSettingsPath(request.exportMode, "spine_build_basic_animation");
+        if (!settingsCheck.valid) {
+          return textContent(
+            formatJson({
+              success: false,
+              failedAt,
+              error: settingsCheck.error,
+              jsonPath: generationResult.jsonPath,
+              projectPath: generationResult.projectPath,
+              importResult,
+            }),
+          );
+        }
+
         const exportOutputDir = await createExportOutputDir(generationResult.outputDir);
-        const exportResult = await runSpine([
-          "-i",
-          generationResult.projectPath,
-          "-o",
-          exportOutputDir,
-          "-e",
-          request.exportMode ?? "json+pack",
-        ]);
+        const exportArgs = ["-i", generationResult.projectPath, "-o", exportOutputDir];
+        if (request.exportMode) {
+          exportArgs.push("-e", request.exportMode);
+        }
+        const exportResult = await runSpine(exportArgs);
 
         if (!exportResult.success) {
           return textContent(

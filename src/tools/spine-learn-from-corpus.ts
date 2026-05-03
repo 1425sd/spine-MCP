@@ -131,7 +131,7 @@ async function resolveProjectJson(
     return { jsonPath: cachedJson };
   }
 
-  const exportResult = await runSpine(["-i", project.filePath, "-o", cacheDir, "-e", "json"]);
+  const exportResult = await runSpine(["-i", project.filePath, "-o", cacheDir]);
   if (!exportResult.success) {
     return {
       failedProject: {

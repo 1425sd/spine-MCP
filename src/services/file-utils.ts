@@ -7,6 +7,7 @@ export interface AssetValidationResult {
   missingFiles: string[];
   existingRequiredFiles: string[];
   allPngFiles: string[];
+  allPngFilePaths: string[];
   isValid: boolean;
 }
 
@@ -47,6 +48,7 @@ export async function validateAssetsDir(
       missingFiles: [...requiredFiles],
       existingRequiredFiles: [],
       allPngFiles: [],
+      allPngFilePaths: [],
       isValid: false,
     };
   }
@@ -60,10 +62,14 @@ export async function validateAssetsDir(
     fileNames.has(fileName),
   );
   const missingFiles = requiredFiles.filter((fileName) => !fileNames.has(fileName));
-  const allPngFiles = entries
+  const pngEntries = entries
     .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".png"))
-    .map((entry) => path.join(assetsDir, entry.name))
-    .sort((a, b) => a.localeCompare(b));
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const allPngFiles = pngEntries.map((entry) => entry.name);
+  const allPngFilePaths = pngEntries.map((entry) =>
+    path.join(assetsDir, entry.name),
+  );
 
   return {
     assetsDir,
@@ -71,6 +77,7 @@ export async function validateAssetsDir(
     missingFiles,
     existingRequiredFiles,
     allPngFiles,
+    allPngFilePaths,
     isValid: missingFiles.length === 0,
   };
 }

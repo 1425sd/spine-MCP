@@ -9,7 +9,7 @@ import {
   loadKnowledge,
   recommendAnimationParams,
 } from "../corpus/knowledge-loader.js";
-import { formatJson, formatToolError, textContent } from "./common.js";
+import { formatJson, formatToolError, textContent, validateExportSettingsPath } from "./common.js";
 import {
   characterTypeSchema,
   exportModeSchema,
@@ -53,7 +53,7 @@ const schema = {
 export function registerSpineBuildBasicAnimationWithKnowledgeTool(server: McpServer): void {
   server.tool(
     "spine_build_basic_animation_with_knowledge",
-    "High-level generator that automatically reads the Spine Corpus Learning Layer before building. It analyzes assets, recommends animations and learned preset parameters from userGoal, generates basic region-attachment Spine JSON, imports it to .spine, exports it, and optionally opens the project. If knowledge files are missing it returns a warning and falls back to second-version defaults. Use this for simple region PNG animations such as cat loading, mascot idle, logo bounce, breathing, blink, tail wag, float, and paw wave. Do not use it for mesh, IK, weights, professional rigging, UI automation, mouse/keyboard simulation, or direct .spine binary edits.",
+    "High-level generator that reads learned corpus presets before building. Analyzes assets, recommends animations from userGoal, generates Spine JSON, imports, exports, and optionally opens. Falls back to defaults if knowledge missing. Not for mesh, IK, weights, or UI automation.",
     schema,
     async (request) => {
       let failedAt:
@@ -150,15 +150,28 @@ export function registerSpineBuildBasicAnimationWithKnowledgeTool(server: McpSer
         }
 
         failedAt = "export";
+        const settingsCheck = await validateExportSettingsPath(request.exportMode, "spine_build_basic_animation_with_knowledge");
+        if (!settingsCheck.valid) {
+          return textContent(
+            formatJson({
+              success: false,
+              failedAt,
+              error: settingsCheck.error,
+              knowledgeFound: knowledge.exists,
+              recommendation,
+              jsonPath: generationResult.jsonPath,
+              projectPath: generationResult.projectPath,
+              importResult,
+            }),
+          );
+        }
+
         const exportOutputDir = await createExportOutputDir(generationResult.outputDir);
-        const exportResult = await runSpine([
-          "-i",
-          generationResult.projectPath,
-          "-o",
-          exportOutputDir,
-          "-e",
-          request.exportMode ?? "json+pack",
-        ]);
+        const exportArgs = ["-i", generationResult.projectPath, "-o", exportOutputDir];
+        if (request.exportMode) {
+          exportArgs.push("-e", request.exportMode);
+        }
+        const exportResult = await runSpine(exportArgs);
 
         if (!exportResult.success) {
           return textContent(

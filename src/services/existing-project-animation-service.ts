@@ -12,6 +12,7 @@ import {
   ensureOutputDir,
 } from "./generated-project-service.js";
 import { runSpine, type SpineCommandResult } from "./spine-cli.js";
+import { validateExportSettingsPath } from "../tools/common.js";
 import type { AnimationRecommendation } from "../types/corpus-learning.js";
 import type { BasicAnimationPresetName } from "../types/generated-spine.js";
 
@@ -29,7 +30,7 @@ export interface ExistingProjectAnimationRequest {
   outputDir: string;
   projectName: string;
   userGoal: string;
-  exportMode?: "json" | "json+pack" | "binary" | "binary+pack";
+  exportMode?: string;
   openAfterBuild?: boolean;
   overwrite?: boolean;
   knowledgeDir?: string;
@@ -104,8 +105,6 @@ export async function prepareExistingProjectJson(params: {
     spineProjectPath,
     "-o",
     exportDir,
-    "-e",
-    "json",
   ]);
 
   if (!exportResult.success) {
@@ -292,14 +291,20 @@ export async function buildPreparedExistingProjectAnimation(params: {
   }
 
   const exportOutputDir = await createExportOutputDir(params.outputDir);
-  const exportResult = await runSpine([
-    "-i",
-    projectPath,
-    "-o",
-    exportOutputDir,
-    "-e",
-    params.request.exportMode ?? "json+pack",
-  ]);
+  const exportArgs = ["-i", projectPath, "-o", exportOutputDir];
+
+  if (params.request.exportMode) {
+    const settingsCheck = await validateExportSettingsPath(
+      params.request.exportMode,
+      "existing-project-animation-service",
+    );
+    if (!settingsCheck.valid) {
+      throw new Error(settingsCheck.error);
+    }
+    exportArgs.push("-e", params.request.exportMode);
+  }
+
+  const exportResult = await runSpine(exportArgs);
   const openResult =
     exportResult.success && params.request.openAfterBuild !== false
       ? await runSpine([projectPath], { waitForExit: false })

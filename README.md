@@ -94,13 +94,15 @@ Use this when you need Spine CLI metadata. Do not use it to export, pack, import
 Export a Spine project:
 
 ```text
-Spine -i "G:\cat\cat.spine" -o "G:\cat\dist" -e json+pack
+Spine -i "G:\cat\cat.spine" -o "G:\cat\dist" -e export-settings.json
 ```
 
 Optional flags:
 
 - `--update <updateVersion>`
 - `-m` when `clean=true`
+
+The `exportModeOrSettings` parameter must be a path to an existing Spine export settings JSON file. Mode strings like `json+pack` are not accepted by the Spine CLI `-e` flag. If omitted, Spine uses its default export behavior.
 
 Use this for official CLI exports. Do not use it for texture-only packing, JSON import, UI automation, or internal project edits.
 
@@ -173,7 +175,8 @@ Returns:
 
 - `missingFiles`
 - `existingRequiredFiles`
-- `allPngFiles`
+- `allPngFiles` (filenames only, e.g. `["body.png", "head.png"]`)
+- `allPngFilePaths` (absolute paths, e.g. `["G:\\cat-assets\\body.png"]`)
 - `isValid`
 
 Use this before CLI work to check whether expected PNG files exist. It only reads the folder.
@@ -424,6 +427,130 @@ overwrite = true
 ```
 
 This workflow still only creates basic region/slot/keyframe animation. It does not bind mesh, edit weights, create IK, simulate editor clicks, or modify the original `.spine` binary in place.
+
+## Photoshop-to-Spine JSON Animation Editing Layer
+
+Fourth-version JSON tools work directly on Spine JSON files. This is useful when Photoshop to Spine has already exported a skeleton JSON and an `images` folder. The MCP server reads the existing bones, slots, skins, attachments, and animations, adds simple keyframes to a generated JSON copy, then can import/export through the official Spine CLI.
+
+This layer does not automate the Spine GUI. It does not click, drag the timeline, bind mesh, edit weights, create IK, or modify `.spine` binaries directly.
+
+### `spine_analyze_json`
+
+Read-only inspection:
+
+```text
+Use spine_analyze_json:
+jsonPath = G:\psd-spine\cat.json
+```
+
+Returns skeleton metadata, bones, slots, skins, attachments, animations, and inferred roles such as `body`, `head`, `tail`, `eye_left`, `eye_right`, `paw_left`, `paw_right`, `root`, and `logo`.
+
+### `spine_generate_animation_json`
+
+Generate an animated JSON copy only:
+
+```text
+Use spine_generate_animation_json:
+sourceJsonPath = G:\psd-spine\cat.json
+outputJsonPath = G:\cat-output\cat.animated.json
+userGoal = "cute cat loading animation with breathing, head float, tail swing, and blink"
+animationName = generated_loop
+duration = 2
+characterType = cat
+overwrite = true
+```
+
+Supported basic animation kinds include:
+
+- breathing: body/root scale
+- head_float: head translate
+- tail_swing: tail rotate
+- blink: eye slot attachment switch, or eye bone scale fallback
+- paw_wave: paw/hand/arm rotate
+- logo_bounce: root/logo translate and scale
+- floating: root/body translate
+
+If a target bone or slot cannot be inferred, the tool records a warning and continues with the parts it can animate.
+
+### `spine_add_simple_animation`
+
+Low-level debug tool when you know the exact bone:
+
+```text
+Use spine_add_simple_animation:
+sourceJsonPath = G:\psd-spine\cat.json
+outputJsonPath = G:\cat-output\cat.tail-test.json
+animationName = tail_test
+targetBone = tail
+animationType = rotate
+keyframes = [
+  { "time": 0, "angle": -10 },
+  { "time": 0.5, "angle": 10 },
+  { "time": 1, "angle": -10 }
+]
+overwrite = true
+```
+
+It supports only `rotate`, `translate`, and `scale` timelines on one bone.
+
+### `spine_build_animation_from_json`
+
+One-step JSON pipeline:
+
+```text
+Use spine_build_animation_from_json:
+sourceJsonPath = G:\psd-spine\cat.json
+imagesDir = G:\psd-spine\images
+outputDir = G:\cat-output
+projectName = cute_cat_loading
+userGoal = "Make a cute cat loading animation. Body breathes, head floats, tail swings, eyes blink."
+animationName = loading_loop
+characterType = cat
+exportMode = json+pack
+openAfterBuild = true
+overwrite = true
+knowledgeDir = G:\spine-mcp\knowledge
+```
+
+It runs:
+
+```text
+analyze JSON -> generate animated JSON -> import .spine -> pack textures -> export -> optionally open project
+```
+
+Outputs:
+
+- `outputDir/{projectName}.animated.json`
+- `outputDir/{projectName}.spine`
+- `outputDir/images/` when `imagesDir` is provided
+- `outputDir/dist/`
+- `outputDir/generation.manifest.json`
+
+If `imagesDir` is omitted, import/export relies on image paths already present in the source JSON, which may fail if those paths are relative to the old JSON location.
+
+### `spine_create_loading_animation_preset`
+
+Focused loading presets:
+
+```text
+Use spine_create_loading_animation_preset:
+sourceJsonPath = G:\psd-spine\cat.json
+outputJsonPath = G:\cat-output\cat.loading.json
+preset = cute_cat_loading
+duration = 2
+intensity = normal
+overwrite = true
+```
+
+Supported presets:
+
+- `cute_cat_loading`
+- `logo_bounce`
+- `breathing_idle`
+- `floating_character`
+- `blink_loop`
+
+Use `soft` intensity for subtle UI loading loops and `strong` only when you want visibly larger motion.
 
 ## Development
 

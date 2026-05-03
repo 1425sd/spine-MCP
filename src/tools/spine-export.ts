@@ -1,7 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { runSpine } from "../services/spine-cli.js";
-import { formatSpineResult, formatToolError, textContent } from "./common.js";
+import { formatSpineResult, formatToolError, textContent, validateExportSettingsPath } from "./common.js";
 
 const schema = {
   projectPath: z
@@ -15,8 +15,8 @@ const schema = {
   exportModeOrSettings: z
     .string()
     .min(1)
-    .default("json+pack")
-    .describe('Spine export mode or export settings name/file, for example "json+pack".'),
+    .optional()
+    .describe('Spine export settings JSON file path. Mode strings like "json+pack" are not accepted - provide a real .json export settings file, or omit to use Spine defaults.'),
   updateVersion: z
     .string()
     .min(1)
@@ -35,6 +35,17 @@ export function registerSpineExportTool(server: McpServer): void {
     schema,
     async ({ projectPath, outputPath, exportModeOrSettings, updateVersion, clean }) => {
       try {
+        const settingsCheck = await validateExportSettingsPath(exportModeOrSettings, "spine_export");
+        if (!settingsCheck.valid) {
+          return textContent(
+            JSON.stringify(
+              { success: false, error: settingsCheck.error },
+              null,
+              2,
+            ),
+          );
+        }
+
         const args: string[] = [];
 
         if (updateVersion) {
@@ -47,7 +58,11 @@ export function registerSpineExportTool(server: McpServer): void {
           args.push("-m");
         }
 
-        args.push("-o", outputPath, "-e", exportModeOrSettings);
+        args.push("-o", outputPath);
+
+        if (exportModeOrSettings) {
+          args.push("-e", exportModeOrSettings);
+        }
 
         const result = await runSpine(args);
         return textContent(formatSpineResult(result));

@@ -28,6 +28,12 @@ Recommended: point `SPINE_EXE` to `Spine.com`.
 $env:SPINE_EXE = "C:\Program Files\Spine\Spine.com"
 ```
 
+Example for a custom local install path:
+
+```powershell
+$env:SPINE_EXE = "E:\BaiduNetdiskDownload\Spine pro 3.8.75+K'D\Spine.com"
+```
+
 To persist it for future PowerShell sessions:
 
 ```powershell
@@ -63,6 +69,12 @@ With an explicit Spine CLI path:
 
 ```powershell
 claude mcp add --transport stdio --env SPINE_EXE="C:\Program Files\Spine\Spine.com" spine-mcp -- node G:\spine-mcp\build\index.js
+```
+
+Custom local path example:
+
+```powershell
+claude mcp add --transport stdio --env SPINE_EXE="E:\BaiduNetdiskDownload\Spine pro 3.8.75+K'D\Spine.com" spine-mcp -- node G:\spine-mcp\build\index.js
 ```
 
 ## Tools
@@ -369,6 +381,49 @@ overwrite = true
 This high-level tool reads the knowledge files automatically. It does not depend on the AI remembering to call `spine_get_generation_guide` first. If knowledge files are missing, it returns a warning and continues with second-version defaults.
 
 The generated result is still a basic region-attachment animation. High-quality animation may still need manual adjustment in Spine.
+
+## Existing Project Animation Workflow
+
+Use `spine_build_animation_from_existing_project` when you already have a Photoshop to Spine exported JSON, an `images` folder, or an existing `.spine` project. This workflow keeps the original source files untouched and writes a modified generated copy into `outputDir`.
+
+Supported inputs:
+
+- `sourceJsonPath`: an existing Spine JSON file, including Photoshop to Spine output.
+- `imagesDir`: optional image folder referenced by the JSON. When provided, it is copied to `outputDir/images`.
+- `spineProjectPath`: an existing `.spine` file. MCP first exports it to JSON with Spine CLI, then adds generated animation keyframes.
+
+The tool reads the learned knowledge files from `knowledgeDir` (default `G:\spine-mcp\knowledge`) and falls back to built-in presets if knowledge files do not exist. It infers existing bones, slots, and default attachments, then adds simple bone transform or slot attachment timelines such as `idle`, `breathing`, `blink`, `tail_wag`, `head_bob`, `float`, `logo_bounce`, and `paw_wave`.
+
+Photoshop to Spine JSON example:
+
+```text
+Use spine_build_animation_from_existing_project:
+sourceJsonPath = G:\cat-psd-export\cat.json
+imagesDir = G:\cat-psd-export\images
+outputDir = G:\cat-existing-output
+projectName = cute_cat_existing
+userGoal = "Make a cute cat loading animation with breathing, head bob, tail wag, and blink."
+characterType = cat
+exportMode = json+pack
+openAfterBuild = true
+overwrite = true
+```
+
+Existing `.spine` project example:
+
+```text
+Use spine_build_animation_from_existing_project:
+spineProjectPath = G:\cat-source\cat.spine
+outputDir = G:\cat-existing-output
+projectName = cute_cat_existing
+userGoal = "Add a restrained idle animation with breathing and blinking."
+characterType = cat
+exportMode = json+pack
+openAfterBuild = true
+overwrite = true
+```
+
+This workflow still only creates basic region/slot/keyframe animation. It does not bind mesh, edit weights, create IK, simulate editor clicks, or modify the original `.spine` binary in place.
 
 ## Development
 

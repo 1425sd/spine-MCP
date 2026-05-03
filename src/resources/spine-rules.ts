@@ -33,6 +33,14 @@ Allowed third-version scope:
 - Use learned presets and naming rules to recommend basic generator parameters.
 - Fall back to built-in defaults when knowledge files are missing.
 
+Allowed existing-project animation scope:
+- Read an existing Spine JSON file or export an existing .spine project to JSON through Spine CLI.
+- Infer existing bones, slots, and default attachments from the generated JSON copy.
+- Add basic bone transform and slot attachment timelines to a copied JSON file under outputDir.
+- Copy an optional imagesDir into outputDir/images.
+- Import the modified JSON copy into a new .spine project through Spine CLI.
+- Export that generated .spine project through Spine CLI.
+
 Out of scope:
 - UI automation.
 - AutoHotkey.

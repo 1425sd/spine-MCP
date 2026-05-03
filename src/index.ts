@@ -3,6 +3,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { registerSpineRulesResource } from "./resources/spine-rules.js";
 import { registerSpineAnalyzeAssetsTool } from "./tools/spine-analyze-assets.js";
+import { registerSpineBuildAnimationFromExistingProjectTool } from "./tools/spine-build-animation-from-existing-project.js";
 import { registerSpineBuildBasicAnimationWithKnowledgeTool } from "./tools/spine-build-basic-animation-with-knowledge.js";
 import { registerSpineBuildBasicAnimationTool } from "./tools/spine-build-basic-animation.js";
 import { registerSpineCleanTool } from "./tools/spine-clean.js";
@@ -43,6 +44,7 @@ registerSpineLearnFromCorpusTool(server);
 registerSpineGetGenerationGuideTool(server);
 registerSpineRecommendAnimationParamsTool(server);
 registerSpineBuildBasicAnimationWithKnowledgeTool(server);
+registerSpineBuildAnimationFromExistingProjectTool(server);
 
 const transport = new StdioServerTransport();
 

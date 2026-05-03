@@ -1,7 +1,4 @@
-import type {
-  BasicAnimationPresetName,
-  BasicAnimationRequest,
-} from "./generated-spine.js";
+import type { BasicAnimationPresetName } from "./generated-spine.js";
 
 export type CorpusAnimationType =
   | BasicAnimationPresetName
@@ -225,5 +222,9 @@ export interface AnimationRecommendation {
   recommendedPresetParams: Partial<Record<BasicAnimationPresetName, Record<string, number>>>;
   warnings: string[];
   reasoningSummary: string;
-  requestPatch: Pick<BasicAnimationRequest, "animations" | "duration" | "presetParams">;
+  requestPatch: {
+    animations?: string[];
+    duration?: number;
+    presetParams?: Partial<Record<BasicAnimationPresetName, Record<string, number>>>;
+  };
 }

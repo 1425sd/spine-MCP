@@ -16,6 +16,7 @@ import { formatJson, textContent, validateExportSettingsPath } from "./common.js
 import {
   characterTypeSchema,
   exportModeSchema,
+  exportSettingsPathSchema,
   overwriteSchema,
   projectNameSchema,
 } from "./generated-tool-schemas.js";
@@ -58,6 +59,11 @@ const schema = {
       "Natural-language animation goal. The tool uses this with learned corpus presets to choose simple keyframes for the existing skeleton.",
     ),
   characterType: characterTypeSchema,
+  sourceExportSettingsPath: z
+    .string()
+    .min(1)
+    .optional()
+    .describe("Path to a Spine export settings .json file used to export spineProjectPath to JSON before analysis. Required when using spineProjectPath unless exportSettingsPath/exportMode also points to a JSON export setting."),
   knowledgeDir: z
     .string()
     .min(1)
@@ -65,6 +71,7 @@ const schema = {
     .describe(
       "Directory containing learned knowledge files. Defaults to G:\\spine-mcp\\knowledge. If missing, built-in fallback presets are used.",
     ),
+  exportSettingsPath: exportSettingsPathSchema,
   exportMode: exportModeSchema,
   openAfterBuild: z
     .boolean()
@@ -107,6 +114,8 @@ export function registerSpineBuildAnimationFromExistingProjectTool(server: McpSe
           outputDir: request.outputDir,
           projectName: request.projectName,
           userGoal: request.userGoal,
+          sourceExportSettingsPath: request.sourceExportSettingsPath,
+          exportSettingsPath: request.exportSettingsPath,
           exportMode: request.exportMode,
           openAfterBuild: request.openAfterBuild,
           overwrite: request.overwrite,
@@ -116,6 +125,37 @@ export function registerSpineBuildAnimationFromExistingProjectTool(server: McpSe
         failedAt = "load_knowledge";
         const knowledge = await loadKnowledge(request.knowledgeDir);
         const warnings = [...knowledge.warnings];
+        const finalExportSettingsPath =
+          request.exportSettingsPath ?? request.exportMode;
+
+        if (
+          request.spineProjectPath &&
+          !request.sourceJsonPath &&
+          !request.sourceExportSettingsPath &&
+          finalExportSettingsPath
+        ) {
+          warnings.push(
+            "sourceExportSettingsPath was not provided. Using exportSettingsPath/exportMode for the source .spine to JSON export.",
+          );
+        }
+
+        const sourceSettingsCheck = await validateExportSettingsPath(
+          request.sourceExportSettingsPath ?? finalExportSettingsPath,
+          "spine_build_animation_from_existing_project source export",
+          { required: Boolean(request.spineProjectPath && !request.sourceJsonPath) },
+        );
+        if (!sourceSettingsCheck.valid) {
+          return textContent(
+            formatJson({
+              success: false,
+              failedAt: "prepare_source",
+              error: sourceSettingsCheck.error,
+              knowledgeFound: knowledge.exists,
+              knowledgeDir: knowledge.knowledgeDir,
+              warnings: dedupe(warnings),
+            }),
+          );
+        }
 
         failedAt = "prepare_source";
         const outputDir = await ensureOutputDir(
@@ -146,7 +186,10 @@ export function registerSpineBuildAnimationFromExistingProjectTool(server: McpSe
         });
         warnings.push(...recommendation.warnings);
 
-        const settingsCheck = await validateExportSettingsPath(request.exportMode, "spine_build_animation_from_existing_project");
+        const settingsCheck = await validateExportSettingsPath(
+          finalExportSettingsPath,
+          "spine_build_animation_from_existing_project",
+        );
         if (!settingsCheck.valid) {
           failedAt = "export";
           return textContent(

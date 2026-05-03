@@ -30,6 +30,8 @@ export interface ExistingProjectAnimationRequest {
   outputDir: string;
   projectName: string;
   userGoal: string;
+  sourceExportSettingsPath?: string;
+  exportSettingsPath?: string;
   exportMode?: string;
   openAfterBuild?: boolean;
   overwrite?: boolean;
@@ -99,12 +101,26 @@ export async function prepareExistingProjectJson(params: {
 
   const exportDir = path.join(params.outputDir, "_source-export");
   await mkdir(exportDir, { recursive: true });
+  const sourceExportSettingsPath =
+    params.request.sourceExportSettingsPath ??
+    params.request.exportSettingsPath ??
+    params.request.exportMode;
+  const settingsCheck = await validateExportSettingsPath(
+    sourceExportSettingsPath,
+    "prepare_existing_project_json",
+    { required: true },
+  );
+  if (!settingsCheck.valid) {
+    throw new Error(settingsCheck.error);
+  }
 
   const exportResult = await runSpine([
     "-i",
     spineProjectPath,
     "-o",
     exportDir,
+    "-e",
+    sourceExportSettingsPath!,
   ]);
 
   if (!exportResult.success) {
@@ -291,22 +307,34 @@ export async function buildPreparedExistingProjectAnimation(params: {
   }
 
   const exportOutputDir = await createExportOutputDir(params.outputDir);
-  const exportArgs = ["-i", projectPath, "-o", exportOutputDir];
+  const finalExportSettingsPath =
+    params.request.exportSettingsPath ?? params.request.exportMode;
+  let exportResult: SpineCommandResult | undefined;
 
-  if (params.request.exportMode) {
+  if (finalExportSettingsPath) {
     const settingsCheck = await validateExportSettingsPath(
-      params.request.exportMode,
+      finalExportSettingsPath,
       "existing-project-animation-service",
     );
     if (!settingsCheck.valid) {
       throw new Error(settingsCheck.error);
     }
-    exportArgs.push("-e", params.request.exportMode);
+    exportResult = await runSpine([
+      "-i",
+      projectPath,
+      "-o",
+      exportOutputDir,
+      "-e",
+      finalExportSettingsPath,
+    ]);
+  } else {
+    warnings.push(
+      "No exportSettingsPath was provided. Skipped final Spine export because Spine 3.8.75 requires -e <settings.json> for export.",
+    );
   }
 
-  const exportResult = await runSpine(exportArgs);
   const openResult =
-    exportResult.success && params.request.openAfterBuild !== false
+    (exportResult?.success ?? true) && params.request.openAfterBuild !== false
       ? await runSpine([projectPath], { waitForExit: false })
       : undefined;
 

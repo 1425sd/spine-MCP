@@ -20,7 +20,7 @@ import {
 import { createExportOutputDir, ensureOutputDir } from "../services/generated-project-service.js";
 import { runSpine } from "../services/spine-cli.js";
 import { formatJson, formatToolError, textContent, validateExportSettingsPath } from "./common.js";
-import { overwriteSchema, projectNameSchema } from "./generated-tool-schemas.js";
+import { exportSettingsPathSchema, overwriteSchema, projectNameSchema } from "./generated-tool-schemas.js";
 
 const DEFAULT_KNOWLEDGE_DIR = "G:\\spine-mcp\\knowledge";
 
@@ -56,8 +56,9 @@ const schema = {
   exportMode: z
     .string()
     .min(1)
-    .default("json+pack")
-    .describe('Spine export mode passed to -e. Defaults to "json+pack".'),
+    .optional()
+    .describe('Deprecated alias for exportSettingsPath. Must be a Spine export settings .json file path, not "json" or "json+pack".'),
+  exportSettingsPath: exportSettingsPathSchema,
   openAfterBuild: z
     .boolean()
     .default(true)
@@ -73,7 +74,7 @@ const schema = {
 export function registerSpineBuildAnimationFromJsonTool(server: McpServer): void {
   server.tool(
     "spine_build_animation_from_json",
-    "One-step JSON animation pipeline: analyze source JSON, generate animated copy, import to .spine, optionally pack images, export, and open. Use for Photoshop-to-Spine JSON plus images. Not for .spine sources, mesh, IK, weights, or UI automation.",
+    "One-step JSON animation pipeline: analyze source JSON, generate animated copy, import to .spine, optionally pack images, export, and open. Use for Spine JSON plus images. Not for .spine sources, mesh, IK, weights, or UI automation.",
     schema,
     async (request) => {
       let failedAt:
@@ -192,7 +193,12 @@ export function registerSpineBuildAnimationFromJsonTool(server: McpServer): void
         }
 
         failedAt = "export";
-        const settingsCheck = await validateExportSettingsPath(request.exportMode, "spine_build_animation_from_json");
+        const effectiveExportSettingsPath =
+          request.exportSettingsPath ?? request.exportMode;
+        const settingsCheck = await validateExportSettingsPath(
+          effectiveExportSettingsPath,
+          "spine_build_animation_from_json",
+        );
         if (!settingsCheck.valid) {
           return textContent(
             formatJson({
@@ -210,12 +216,21 @@ export function registerSpineBuildAnimationFromJsonTool(server: McpServer): void
           );
         }
 
-        const exportArgs = ["-i", projectPath, "-o", exportOutputDir];
-        if (request.exportMode) {
-          exportArgs.push("-e", request.exportMode);
-        }
-        const exportResult = await runSpine(exportArgs);
-        if (!exportResult.success) {
+        const exportResult = effectiveExportSettingsPath
+          ? await runSpine([
+            "-i",
+            projectPath,
+            "-o",
+            exportOutputDir,
+            "-e",
+            effectiveExportSettingsPath,
+          ])
+          : undefined;
+        if (!exportResult) {
+          warnings.push(
+            "No exportSettingsPath was provided. Skipped final Spine export because Spine 3.8.75 requires -e <settings.json> for export.",
+          );
+        } else if (!exportResult.success) {
           return textContent(
             formatJson({
               success: false,
@@ -267,6 +282,7 @@ export function registerSpineBuildAnimationFromJsonTool(server: McpServer): void
             animatedJsonPath,
             projectPath,
             exportOutputDir,
+            exportSettingsPath: effectiveExportSettingsPath,
             copiedImagesDir,
             manifestPath,
             generated,

@@ -21,7 +21,7 @@ import type {
   CorpusProjectFile,
   FailedCorpusProject,
 } from "../types/corpus-learning.js";
-import { formatJson, formatToolError, textContent } from "./common.js";
+import { formatJson, formatToolError, textContent, validateExportSettingsPath } from "./common.js";
 
 const schema = {
   corpusDir: z
@@ -33,6 +33,11 @@ const schema = {
     .min(1)
     .optional()
     .describe("Directory where learned knowledge files should be written. Defaults to project knowledge/."),
+  exportSettingsPath: z
+    .string()
+    .min(1)
+    .optional()
+    .describe("Path to a Spine export settings .json file used to export .spine corpus projects to JSON. Required for analyzing .spine files with Spine 3.8.75."),
   maxProjects: z
     .number()
     .int()
@@ -50,12 +55,33 @@ export function registerSpineLearnFromCorpusTool(server: McpServer): void {
     "spine_learn_from_corpus",
     "Use this to build the local Spine Corpus Learning Layer. It scans .json and .spine projects, exports .spine files to .cache/corpus-json when needed, extracts naming/animation/statistical features, and writes markdown/json knowledge files. It never modifies or deletes corpus source files. Single-project failures are recorded and do not stop the batch. Do not use it for live animation generation or UI automation.",
     schema,
-    async ({ corpusDir, outputKnowledgeDir, maxProjects, overwrite }) => {
+    async ({ corpusDir, outputKnowledgeDir, exportSettingsPath, maxProjects, overwrite }) => {
       try {
+        const settingsCheck = await validateExportSettingsPath(
+          exportSettingsPath,
+          "spine_learn_from_corpus",
+        );
+        if (!settingsCheck.valid) {
+          return textContent(
+            formatJson({
+              success: false,
+              failedAt: "learn_from_corpus",
+              error: settingsCheck.error,
+            }),
+          );
+        }
+
         const knowledgeDir = path.resolve(outputKnowledgeDir ?? getDefaultKnowledgeDir());
         const scan = await scanCorpus(corpusDir, maxProjects);
         const accumulator = createCorpusStatisticsAccumulator();
         const warnings = [...scan.warnings];
+        const hasSpineProjects = scan.projects.some((project) => project.extension === ".spine");
+
+        if (hasSpineProjects && !exportSettingsPath) {
+          warnings.push(
+            "No exportSettingsPath was provided. .spine corpus projects cannot be exported to JSON with Spine 3.8.75 and will be recorded as failed projects.",
+          );
+        }
 
         for (let index = 0; index < scan.projects.length; index += 1) {
           const project = scan.projects[index];
@@ -63,7 +89,7 @@ export function registerSpineLearnFromCorpusTool(server: McpServer): void {
             `[spine-mcp] learning ${index + 1}/${scan.projects.length}: ${project.relativePath}`,
           );
 
-          const resolved = await resolveProjectJson(project);
+          const resolved = await resolveProjectJson(project, exportSettingsPath);
           if ("failedProject" in resolved) {
             addFailedProject(accumulator, resolved.failedProject);
             continue;
@@ -118,6 +144,7 @@ export function registerSpineLearnFromCorpusTool(server: McpServer): void {
 
 async function resolveProjectJson(
   project: CorpusProjectFile,
+  exportSettingsPath: string | undefined,
 ): Promise<{ jsonPath: string } | { failedProject: FailedCorpusProject }> {
   if (project.extension === ".json") {
     return { jsonPath: project.filePath };
@@ -131,7 +158,25 @@ async function resolveProjectJson(
     return { jsonPath: cachedJson };
   }
 
-  const exportResult = await runSpine(["-i", project.filePath, "-o", cacheDir]);
+  if (!exportSettingsPath) {
+    return {
+      failedProject: {
+        projectPath: project.filePath,
+        failedAt: "export_spine",
+        error:
+          "exportSettingsPath is required to export .spine corpus projects to JSON with Spine 3.8.75.",
+      },
+    };
+  }
+
+  const exportResult = await runSpine([
+    "-i",
+    project.filePath,
+    "-o",
+    cacheDir,
+    "-e",
+    exportSettingsPath,
+  ]);
   if (!exportResult.success) {
     return {
       failedProject: {

@@ -12,16 +12,21 @@ const schema = {
     .string()
     .min(1)
     .describe("Destination file or directory for Spine export output, depending on the export setting."),
+  exportSettingsPath: z
+    .string()
+    .min(1)
+    .optional()
+    .describe("Path to a Spine export settings .json file used with -e. Required for Spine 3.8.75 exports."),
   exportModeOrSettings: z
     .string()
     .min(1)
     .optional()
-    .describe('Spine export settings JSON file path. Mode strings like "json+pack" are not accepted - provide a real .json export settings file, or omit to use Spine defaults.'),
+    .describe('Deprecated alias for exportSettingsPath. Mode strings like "json" or "json+pack" are not accepted.'),
   updateVersion: z
     .string()
     .min(1)
     .optional()
-    .describe('Optional Spine version update target before export, for example "lateststable" or a concrete version.'),
+    .describe("Deprecated. Spine 3.8.75 help lists --update only for editor launch, not export commands."),
   clean: z
     .boolean()
     .default(false)
@@ -31,11 +36,30 @@ const schema = {
 export function registerSpineExportTool(server: McpServer): void {
   server.tool(
     "spine_export",
-    "Use this to export a .spine project with the official Spine CLI, optionally updating the project version or cleaning animations. Do not use it for texture-only packing, JSON import, editor UI automation, or direct project structure edits.",
+    "Use this to export a .spine project with the official Spine CLI and an export settings JSON file. Do not use it for texture-only packing, JSON import, editor UI automation, or direct project structure edits.",
     schema,
-    async ({ projectPath, outputPath, exportModeOrSettings, updateVersion, clean }) => {
+    async ({ projectPath, outputPath, exportSettingsPath, exportModeOrSettings, updateVersion, clean }) => {
       try {
-        const settingsCheck = await validateExportSettingsPath(exportModeOrSettings, "spine_export");
+        if (updateVersion) {
+          return textContent(
+            JSON.stringify(
+              {
+                success: false,
+                error:
+                  "Spine 3.8.75 export usage does not include --update. Open/update the project separately, then run spine_export with exportSettingsPath.",
+              },
+              null,
+              2,
+            ),
+          );
+        }
+
+        const effectiveExportSettingsPath = exportSettingsPath ?? exportModeOrSettings;
+        const settingsCheck = await validateExportSettingsPath(
+          effectiveExportSettingsPath,
+          "spine_export",
+          { required: true },
+        );
         if (!settingsCheck.valid) {
           return textContent(
             JSON.stringify(
@@ -48,10 +72,6 @@ export function registerSpineExportTool(server: McpServer): void {
 
         const args: string[] = [];
 
-        if (updateVersion) {
-          args.push("--update", updateVersion);
-        }
-
         args.push("-i", projectPath);
 
         if (clean) {
@@ -59,10 +79,7 @@ export function registerSpineExportTool(server: McpServer): void {
         }
 
         args.push("-o", outputPath);
-
-        if (exportModeOrSettings) {
-          args.push("-e", exportModeOrSettings);
-        }
+        args.push("-e", effectiveExportSettingsPath!);
 
         const result = await runSpine(args);
         return textContent(formatSpineResult(result));

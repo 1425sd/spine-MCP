@@ -6,13 +6,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const serverPath = path.join(__dirname, "..", "build", "index.js");
 
 const REQUIRED_TOOLS = [
+  "spine_info",
+  "spine_export",
+  "spine_import_json",
+  "spine_clean",
+  "spine_open_project",
   "spine_analyze_json",
-  "spine_generate_simple_skeleton_json",
+  "spine_generate_animation_json",
+  "spine_add_simple_animation",
+  "spine_scan_corpus",
+  "spine_learn_from_corpus",
+  "spine_get_generation_guide",
+  "spine_recommend_animation_params",
+  "spine_build_animation_from_existing_project",
   "spine_build_animation_from_json",
   "spine_create_loading_animation_preset",
 ];
 
-const MIN_TOOL_COUNT = 23;
+const MIN_TOOL_COUNT = 15;
 
 let nextId = 1;
 const pendingRequests = new Map();
@@ -115,7 +126,7 @@ async function run() {
     arguments: {
       projectPath: "G:\\fake\\project.spine",
       outputPath: "G:\\fake\\output",
-      exportModeOrSettings: "json+pack",
+      exportSettingsPath: "json+pack",
     },
   });
   const text1 = exportResponse1.result?.content?.[0]?.text ?? "";
@@ -137,7 +148,7 @@ async function run() {
     arguments: {
       projectPath: "G:\\fake\\project.spine",
       outputPath: "G:\\fake\\output",
-      exportModeOrSettings: "json",
+      exportSettingsPath: "json",
     },
   });
   const text2 = exportResponse2.result?.content?.[0]?.text ?? "";
@@ -159,7 +170,7 @@ async function run() {
     arguments: {
       projectPath: "G:\\fake\\project.spine",
       outputPath: "G:\\fake\\output",
-      exportModeOrSettings: "G:\\nonexistent\\settings.json",
+      exportSettingsPath: "G:\\nonexistent\\settings.json",
     },
   });
   const text3 = exportResponse3.result?.content?.[0]?.text ?? "";
@@ -172,6 +183,27 @@ async function run() {
     failed = true;
   } else {
     console.log(`[smoke]   PASS: ${parsed3.error}`);
+  }
+
+  // Test 5: spine_export requires an export settings file
+  console.log("[smoke] Test 5: spine_export requires exportSettingsPath");
+  const exportResponse4 = await sendRequest("tools/call", {
+    name: "spine_export",
+    arguments: {
+      projectPath: "G:\\fake\\project.spine",
+      outputPath: "G:\\fake\\output",
+    },
+  });
+  const text4 = exportResponse4.result?.content?.[0]?.text ?? "";
+  const parsed4 = JSON.parse(text4);
+  if (parsed4.success !== false) {
+    console.error(`[smoke]   FAIL: Expected success=false, got ${parsed4.success}`);
+    failed = true;
+  } else if (!parsed4.error?.includes("requires")) {
+    console.error(`[smoke]   FAIL: Error should mention 'requires': ${parsed4.error}`);
+    failed = true;
+  } else {
+    console.log(`[smoke]   PASS: ${parsed4.error}`);
   }
 
   // Summary

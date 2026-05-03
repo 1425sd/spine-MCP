@@ -1,8 +1,8 @@
 # spine-mcp
 
-Local MCP server for first-version Spine automation on Windows. It only calls the official Spine CLI and runs over stdio, so tools such as Claude Code, Codex, and Cursor can start it locally.
+Local MCP server for Spine automation on Windows. It only calls the official Spine CLI and communicates over stdio, so AI tools like Claude Code, Codex, and Cursor can start it locally.
 
-This server does not do UI automation, AutoHotkey, mouse or keyboard simulation, timeline operations, mesh binding, bone weight editing, or direct `.spine` internals modification.
+This server does not do UI automation, AutoHotkey, mouse or keyboard simulation, timeline operations, mesh binding, bone weight editing, or direct `.spine` internals modification. It only modifies `.spine` files through the official Spine CLI.
 
 ## Requirements
 
@@ -71,12 +71,6 @@ With an explicit Spine CLI path:
 claude mcp add --transport stdio --env SPINE_EXE="C:\Program Files\Spine\Spine.com" spine-mcp -- node G:\spine-mcp\build\index.js
 ```
 
-Custom local path example:
-
-```powershell
-claude mcp add --transport stdio --env SPINE_EXE="E:\BaiduNetdiskDownload\Spine pro 3.8.75+K'D\Spine.com" spine-mcp -- node G:\spine-mcp\build\index.js
-```
-
 ## Tools
 
 ### `spine_info`
@@ -99,28 +93,11 @@ Spine -i "G:\cat\cat.spine" -o "G:\cat\dist" -e export-settings.json
 
 Optional flags:
 
-- `--update <updateVersion>`
 - `-m` when `clean=true`
 
-The `exportModeOrSettings` parameter must be a path to an existing Spine export settings JSON file. Mode strings like `json+pack` are not accepted by the Spine CLI `-e` flag. If omitted, Spine uses its default export behavior.
+The `exportSettingsPath` parameter is required and must be a path to an existing Spine export settings JSON file. `exportModeOrSettings` is kept only as a deprecated compatibility alias. Mode strings like `json` or `json+pack` are not accepted by the Spine CLI `-e` flag.
 
 Use this for official CLI exports. Do not use it for texture-only packing, JSON import, UI automation, or internal project edits.
-
-### `spine_pack_textures`
-
-Pack PNG images into an atlas:
-
-```text
-Spine -i "G:\cat\images" -o "G:\cat\dist" -p "default"
-```
-
-If `projectPath` is provided:
-
-```text
-Spine -i "G:\cat\images" -o "G:\cat\dist" -p "default" -j "G:\cat\cat.spine"
-```
-
-Use this for texture packing only. Do not use it to export skeleton data or automate editor UI.
 
 ### `spine_import_json`
 
@@ -133,7 +110,7 @@ Spine -i "G:\cat\cat.json" -o "G:\cat\cat.spine" -r
 Optional:
 
 - `skeletonName` is added after `-r`
-- `scale` is added with `-s <scale>`
+- `scale` is added with `-s <scale>` before `-o`
 
 Use this for official CLI imports. Do not use it for packing textures or direct project internals editing.
 
@@ -157,166 +134,150 @@ Spine "G:\cat\cat.spine"
 
 Use this when you want to continue manual editing. Do not use it for exports or UI automation.
 
-### `spine_validate_assets`
+## Animation Workflow
 
-Read-only asset folder validation. Default required files:
+This server works with existing `.spine` projects and Spine JSON files. All animation generation is applied to a copy of the source files, leaving the originals untouched.
 
-```json
-[
-  "body.png",
-  "head.png",
-  "tail.png",
-  "eye_left.png",
-  "eye_right.png"
+### Recommended workflow
+
+1. Have an existing `.spine` project or Spine JSON file ready.
+2. Use `spine_analyze_json` to inspect the skeleton structure.
+3. Use `spine_build_animation_from_json` or `spine_build_animation_from_existing_project` to add animations.
+4. Use `spine_export` to export the final output.
+
+### `spine_analyze_json`
+
+Read-only inspection of a Spine JSON file:
+
+```text
+Use spine_analyze_json:
+jsonPath = G:\cat\cat.json
+```
+
+Returns skeleton metadata, bones, slots, skins, attachments, animations, and inferred roles.
+
+### `spine_add_simple_animation`
+
+Low-level debug tool when you know the exact bone:
+
+```text
+Use spine_add_simple_animation:
+sourceJsonPath = G:\psd-spine\cat.json
+outputJsonPath = G:\cat-output\cat.tail-test.json
+animationName = tail_test
+targetBone = tail
+animationType = rotate
+keyframes = [
+  { "time": 0, "angle": -10 },
+  { "time": 0.5, "angle": 10 },
+  { "time": 1, "angle": -10 }
 ]
+overwrite = true
 ```
 
-Returns:
+It supports only `rotate`, `translate`, and `scale` timelines on one bone.
 
-- `missingFiles`
-- `existingRequiredFiles`
-- `allPngFiles` (filenames only, e.g. `["body.png", "head.png"]`)
-- `allPngFilePaths` (absolute paths, e.g. `["G:\\cat-assets\\body.png"]`)
-- `isValid`
+### `spine_generate_animation_json`
 
-Use this before CLI work to check whether expected PNG files exist. It only reads the folder.
-
-## Text-to-Spine Basic Generator
-
-Second-version generator for simple PNG region animations. You do not need to prepare a `.spine` template first. Provide a PNG asset folder and an animation description, let the AI convert the description into MCP parameters, then the MCP server:
-
-1. Scans PNG assets.
-2. Infers parts such as `body`, `head`, `tail`, `eye`, `paw`, `shadow`, and `background`.
-3. Generates a basic Spine skeleton JSON using region attachments and simple bone transform timelines.
-4. Imports the generated JSON into a `.spine` project with the Spine CLI.
-5. Exports the project with the Spine CLI, usually as `json+pack`.
-
-This generator is for simple loading animations, logo bounce, mascot idle, tail wag, blink, breathing, head bob, float, and paw wave. It does not support mesh, weights, IK, professional rigging, complex skins, UI automation, mouse or keyboard simulation, or direct `.spine` binary editing. For high quality animation, open the generated `.spine` project in Spine and adjust it manually.
-
-Recommended PNG names:
+Generate an animated JSON copy only:
 
 ```text
-body.png
-head.png
-tail.png
-eye_left.png
-eye_right.png
-paw_left.png
-paw_right.png
+Use spine_generate_animation_json:
+sourceJsonPath = G:\cat\cat.json
+outputJsonPath = G:\cat-output\cat.animated.json
+userGoal = "cute cat loading animation with breathing, head float, tail swing, and blink"
+animationName = generated_loop
+duration = 2
+characterType = cat
+overwrite = true
 ```
 
-If names are not standard, MCP tries to infer roles from names such as `torso`, `face`, `left_eye`, `right_paw`, `ear`, Chinese names such as `身体`, `头`, `尾巴`, `左眼`, and similar patterns. Inference may be wrong, so check warnings from `spine_analyze_assets`.
+Supported basic animation kinds include:
 
-### `spine_analyze_assets`
+- breathing: body/root scale
+- head_float: head translate
+- tail_swing: tail rotate
+- blink: eye slot attachment switch, or eye bone scale fallback
+- paw_wave: paw/hand/arm rotate
+- logo_bounce: root/logo translate and scale
+- floating: root/body translate
 
-Read-only analysis of a PNG folder. It returns each PNG file, width, height, inferred role, confidence, recommended parts, and warnings.
+### `spine_create_loading_animation_preset`
 
-Use this when you want to check whether MCP understands your assets before generating JSON. Do not use it to write files or call Spine.
-
-### `spine_generate_simple_skeleton_json`
-
-Generates:
-
-- `outputDir/{projectName}.json`
-- `outputDir/images/`
-- `outputDir/generation.manifest.json`
-
-It analyzes assets, copies used PNGs, creates a basic Spine JSON, and validates it. It does not call Spine CLI.
-
-Use this to debug generated JSON before import. Do not use it for mesh, weights, IK, or editor automation.
-
-### `spine_validate_generated_json`
-
-Reads a generated JSON file and checks:
-
-- `skeleton`
-- `bones`
-- `slots`
-- `skins`
-- `animations`
-- slot bone references
-- slot default attachments in skins
-- animation bone references
-
-It is intentionally not overly strict, so simple generated Spine JSON is not rejected unnecessarily.
-
-### `spine_import_generated_json`
-
-Imports generated JSON into a `.spine` project:
+Focused loading presets:
 
 ```text
-Spine -i "G:\cat-output\cute_cat_loading.json" -o "G:\cat-output\cute_cat_loading.spine" -r cute_cat_loading
+Use spine_create_loading_animation_preset:
+sourceJsonPath = G:\cat\cat.json
+outputJsonPath = G:\cat-output\cat.loading.json
+preset = cute_cat_loading
+duration = 2
+intensity = normal
+overwrite = true
 ```
 
-Use this when JSON already exists and you only want to import it. Do not use it to generate JSON or export.
+Supported presets:
 
-### `spine_build_basic_animation`
+- `cute_cat_loading`
+- `logo_bounce`
+- `breathing_idle`
+- `floating_character`
+- `blink_loop`
 
-High-level generator. It runs:
+Use `soft` intensity for subtle UI loading loops and `strong` only when you want visibly larger motion.
+
+### `spine_build_animation_from_json`
+
+One-step JSON pipeline:
 
 ```text
-analyze assets -> generate json -> validate json -> import .spine -> export json+pack
-```
-
-Example structured call in Claude Code:
-
-```text
-使用 spine_build_basic_animation:
-assetsDir = G:\cat-assets
+Use spine_build_animation_from_json:
+sourceJsonPath = G:\cat\cat.json
+imagesDir = G:\cat\images
 outputDir = G:\cat-output
 projectName = cute_cat_loading
+userGoal = "Make a cute cat loading animation. Body breathes, head floats, tail swings, eyes blink."
+animationName = loading_loop
 characterType = cat
-animations = ["idle", "breathing", "blink", "tail_wag"]
-exportMode = json+pack
+exportSettingsPath = G:\cat\export-settings.json
 openAfterBuild = true
+overwrite = true
+knowledgeDir = G:\spine-mcp\knowledge
 ```
 
-Natural-language example:
+It runs:
 
 ```text
-请用 Spine MCP 把 G:\cat-assets 里的小猫 PNG 做成一个加载动画。
-身体轻轻呼吸，头上下动，尾巴左右摆，眼睛眨一下。
-输出到 G:\cat-output，项目名 cute_cat_loading，并导出 json+pack。
+analyze JSON -> generate animated JSON -> import .spine -> pack textures -> export -> optionally open project
 ```
 
-AI parameter guidance:
+If `exportSettingsPath` is omitted, the tool still imports the generated `.spine` project and can open it, but it skips the final export step because Spine 3.8.75 requires `-e <settings.json>` for exports.
 
-- Small cat idle loading: `characterType="cat"`, `animations=["idle","breathing","blink","tail_wag"]`
-- Logo bounce: `characterType="logo"`, `animations=["logo_bounce"]`
-- Floating: add `"float"`
-- Blink: add `"blink"`
-- Tail wag: add `"tail_wag"`
-- If animations are omitted:
-  - `cat` defaults to `["idle","breathing","blink","tail_wag"]`
-  - `logo` defaults to `["logo_bounce","float"]`
-  - `generic` defaults to `["idle"]`
+### `spine_build_animation_from_existing_project`
 
-`overwrite=false` stops if `outputDir` already exists. `overwrite=true` can overwrite generated files inside `outputDir`, but the server does not delete files outside `outputDir`.
+Build animations on an existing `.spine` project or Spine JSON. Keeps original files untouched and writes a modified copy to `outputDir`.
 
-## Spine Corpus Learning Layer
+```text
+Use spine_build_animation_from_existing_project:
+spineProjectPath = G:\cat-source\cat.spine
+outputDir = G:\cat-output
+projectName = cute_cat_existing
+userGoal = "Add a restrained idle animation with breathing and blinking."
+characterType = cat
+exportSettingsPath = G:\cat\export-settings.json
+openAfterBuild = true
+overwrite = true
+```
+
+When `spineProjectPath` is used without `sourceJsonPath`, provide `sourceExportSettingsPath` for the temporary project-to-JSON export. If it is omitted, the tool falls back to `exportSettingsPath`/`exportMode` when present.
+
+This workflow only creates basic region/slot/keyframe animation. It does not bind mesh, edit weights, create IK, or modify the original `.spine` binary.
+
+## Corpus Learning Layer
 
 If you have many local Spine source projects, run corpus learning first. This is not large-model training. It is local statistical analysis that extracts patterns from real `.spine` and `.json` projects, then writes markdown and JSON knowledge files that AI tools and MCP tools can read later.
 
 Your source files are not uploaded. The server only reads the corpus directory, exports `.spine` files to local `.cache/corpus-json/` when needed, and writes knowledge files to `knowledge/` or the directory you choose.
-
-The learning layer extracts:
-
-- naming habits for bones, slots, skins, attachments, and animations
-- common skeleton sizes and animation counts
-- common animation names
-- common duration values
-- transform ranges for idle, blink, tail_wag, breathing, float, logo_bounce, and related animations
-- timeline usage such as translate, rotate, scale, attachment, color, drawOrder, and event
-
-Generated files:
-
-```text
-knowledge/learned-spine-guide.md
-knowledge/learned-spine-stats.json
-knowledge/learned-animation-presets.json
-knowledge/learned-naming-rules.json
-knowledge/examples-index.json
-```
 
 ### Step 1: Scan Corpus
 
@@ -334,6 +295,7 @@ This only confirms how many `.spine` and `.json` files can be found. It does not
 使用 spine_learn_from_corpus:
 corpusDir = G:\spine-corpus
 outputKnowledgeDir = G:\spine-mcp\knowledge
+exportSettingsPath = G:\spine-corpus\json-export-settings.json
 maxProjects = 819
 overwrite = true
 ```
@@ -341,8 +303,10 @@ overwrite = true
 For `.json` files, MCP parses them directly. For `.spine` files, MCP calls Spine CLI export:
 
 ```text
-Spine -i "<project.spine>" -o "G:\spine-mcp\.cache\corpus-json\<project>" -e json
+Spine -i "<project.spine>" -o "G:\spine-mcp\.cache\corpus-json\<project>" -e "G:\spine-corpus\json-export-settings.json"
 ```
+
+If `exportSettingsPath` is omitted, `.json` corpus files can still be analyzed directly, but `.spine` corpus files cannot be exported and are recorded as failed projects.
 
 If a project fails to export or parse, it is recorded in `failedProjects` and the batch continues.
 
@@ -366,191 +330,6 @@ knowledgeDir = G:\spine-mcp\knowledge
 ```
 
 This returns recommended animations, duration, learned preset params, warnings, and a short reasoning summary. If knowledge is missing, it falls back to built-in defaults.
-
-### Step 5: Build With Knowledge
-
-```text
-使用 spine_build_basic_animation_with_knowledge:
-assetsDir = G:\cat-assets
-outputDir = G:\cat-output
-projectName = cute_cat_loading
-userGoal = "做一个可爱的小猫加载动画，身体轻轻呼吸，头上下动，尾巴左右摆，眼睛眨一下"
-characterType = cat
-exportMode = json+pack
-openAfterBuild = true
-overwrite = true
-```
-
-This high-level tool reads the knowledge files automatically. It does not depend on the AI remembering to call `spine_get_generation_guide` first. If knowledge files are missing, it returns a warning and continues with second-version defaults.
-
-The generated result is still a basic region-attachment animation. High-quality animation may still need manual adjustment in Spine.
-
-## Existing Project Animation Workflow
-
-Use `spine_build_animation_from_existing_project` when you already have a Photoshop to Spine exported JSON, an `images` folder, or an existing `.spine` project. This workflow keeps the original source files untouched and writes a modified generated copy into `outputDir`.
-
-Supported inputs:
-
-- `sourceJsonPath`: an existing Spine JSON file, including Photoshop to Spine output.
-- `imagesDir`: optional image folder referenced by the JSON. When provided, it is copied to `outputDir/images`.
-- `spineProjectPath`: an existing `.spine` file. MCP first exports it to JSON with Spine CLI, then adds generated animation keyframes.
-
-The tool reads the learned knowledge files from `knowledgeDir` (default `G:\spine-mcp\knowledge`) and falls back to built-in presets if knowledge files do not exist. It infers existing bones, slots, and default attachments, then adds simple bone transform or slot attachment timelines such as `idle`, `breathing`, `blink`, `tail_wag`, `head_bob`, `float`, `logo_bounce`, and `paw_wave`.
-
-Photoshop to Spine JSON example:
-
-```text
-Use spine_build_animation_from_existing_project:
-sourceJsonPath = G:\cat-psd-export\cat.json
-imagesDir = G:\cat-psd-export\images
-outputDir = G:\cat-existing-output
-projectName = cute_cat_existing
-userGoal = "Make a cute cat loading animation with breathing, head bob, tail wag, and blink."
-characterType = cat
-exportMode = json+pack
-openAfterBuild = true
-overwrite = true
-```
-
-Existing `.spine` project example:
-
-```text
-Use spine_build_animation_from_existing_project:
-spineProjectPath = G:\cat-source\cat.spine
-outputDir = G:\cat-existing-output
-projectName = cute_cat_existing
-userGoal = "Add a restrained idle animation with breathing and blinking."
-characterType = cat
-exportMode = json+pack
-openAfterBuild = true
-overwrite = true
-```
-
-This workflow still only creates basic region/slot/keyframe animation. It does not bind mesh, edit weights, create IK, simulate editor clicks, or modify the original `.spine` binary in place.
-
-## Photoshop-to-Spine JSON Animation Editing Layer
-
-Fourth-version JSON tools work directly on Spine JSON files. This is useful when Photoshop to Spine has already exported a skeleton JSON and an `images` folder. The MCP server reads the existing bones, slots, skins, attachments, and animations, adds simple keyframes to a generated JSON copy, then can import/export through the official Spine CLI.
-
-This layer does not automate the Spine GUI. It does not click, drag the timeline, bind mesh, edit weights, create IK, or modify `.spine` binaries directly.
-
-### `spine_analyze_json`
-
-Read-only inspection:
-
-```text
-Use spine_analyze_json:
-jsonPath = G:\psd-spine\cat.json
-```
-
-Returns skeleton metadata, bones, slots, skins, attachments, animations, and inferred roles such as `body`, `head`, `tail`, `eye_left`, `eye_right`, `paw_left`, `paw_right`, `root`, and `logo`.
-
-### `spine_generate_animation_json`
-
-Generate an animated JSON copy only:
-
-```text
-Use spine_generate_animation_json:
-sourceJsonPath = G:\psd-spine\cat.json
-outputJsonPath = G:\cat-output\cat.animated.json
-userGoal = "cute cat loading animation with breathing, head float, tail swing, and blink"
-animationName = generated_loop
-duration = 2
-characterType = cat
-overwrite = true
-```
-
-Supported basic animation kinds include:
-
-- breathing: body/root scale
-- head_float: head translate
-- tail_swing: tail rotate
-- blink: eye slot attachment switch, or eye bone scale fallback
-- paw_wave: paw/hand/arm rotate
-- logo_bounce: root/logo translate and scale
-- floating: root/body translate
-
-If a target bone or slot cannot be inferred, the tool records a warning and continues with the parts it can animate.
-
-### `spine_add_simple_animation`
-
-Low-level debug tool when you know the exact bone:
-
-```text
-Use spine_add_simple_animation:
-sourceJsonPath = G:\psd-spine\cat.json
-outputJsonPath = G:\cat-output\cat.tail-test.json
-animationName = tail_test
-targetBone = tail
-animationType = rotate
-keyframes = [
-  { "time": 0, "angle": -10 },
-  { "time": 0.5, "angle": 10 },
-  { "time": 1, "angle": -10 }
-]
-overwrite = true
-```
-
-It supports only `rotate`, `translate`, and `scale` timelines on one bone.
-
-### `spine_build_animation_from_json`
-
-One-step JSON pipeline:
-
-```text
-Use spine_build_animation_from_json:
-sourceJsonPath = G:\psd-spine\cat.json
-imagesDir = G:\psd-spine\images
-outputDir = G:\cat-output
-projectName = cute_cat_loading
-userGoal = "Make a cute cat loading animation. Body breathes, head floats, tail swings, eyes blink."
-animationName = loading_loop
-characterType = cat
-exportMode = json+pack
-openAfterBuild = true
-overwrite = true
-knowledgeDir = G:\spine-mcp\knowledge
-```
-
-It runs:
-
-```text
-analyze JSON -> generate animated JSON -> import .spine -> pack textures -> export -> optionally open project
-```
-
-Outputs:
-
-- `outputDir/{projectName}.animated.json`
-- `outputDir/{projectName}.spine`
-- `outputDir/images/` when `imagesDir` is provided
-- `outputDir/dist/`
-- `outputDir/generation.manifest.json`
-
-If `imagesDir` is omitted, import/export relies on image paths already present in the source JSON, which may fail if those paths are relative to the old JSON location.
-
-### `spine_create_loading_animation_preset`
-
-Focused loading presets:
-
-```text
-Use spine_create_loading_animation_preset:
-sourceJsonPath = G:\psd-spine\cat.json
-outputJsonPath = G:\cat-output\cat.loading.json
-preset = cute_cat_loading
-duration = 2
-intensity = normal
-overwrite = true
-```
-
-Supported presets:
-
-- `cute_cat_loading`
-- `logo_bounce`
-- `breathing_idle`
-- `floating_character`
-- `blink_loop`
-
-Use `soft` intensity for subtle UI loading loops and `strong` only when you want visibly larger motion.
 
 ## Development
 

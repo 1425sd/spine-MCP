@@ -1,16 +1,5 @@
 import { z } from "zod";
 
-export const animationPresetNameSchema = z.enum([
-  "idle",
-  "breathing",
-  "blink",
-  "tail_wag",
-  "head_bob",
-  "float",
-  "logo_bounce",
-  "paw_wave",
-]);
-
 export const characterTypeSchema = z
   .enum(["cat", "mascot", "logo", "generic"])
   .optional()
@@ -20,7 +9,13 @@ export const exportModeSchema = z
   .string()
   .min(1)
   .optional()
-  .describe('Spine export settings JSON file path. Mode strings like "json+pack" are not accepted - provide a real .json export settings file, or omit to use Spine defaults.');
+  .describe('Deprecated alias for exportSettingsPath. Must be a Spine export settings .json file path. Mode strings like "json" or "json+pack" are not accepted by Spine 3.8.75.');
+
+export const exportSettingsPathSchema = z
+  .string()
+  .min(1)
+  .optional()
+  .describe("Path to a Spine export settings .json file used with -e. If omitted, tools that can build a .spine project skip the final export step.");
 
 export const projectNameSchema = z
   .string()
@@ -29,38 +24,6 @@ export const projectNameSchema = z
     message: "projectName must be a file name, not a path.",
   })
   .describe("Project file base name to generate inside outputDir, without path separators.");
-
-export const animationsSchema = z
-  .array(animationPresetNameSchema)
-  .optional()
-  .describe(
-    "Animation preset names to generate. If omitted, defaults depend on characterType.",
-  );
-
-export const canvasWidthSchema = z
-  .number()
-  .positive()
-  .optional()
-  .describe("Optional Spine skeleton canvas width. Defaults to 512.");
-
-export const canvasHeightSchema = z
-  .number()
-  .positive()
-  .optional()
-  .describe("Optional Spine skeleton canvas height. Defaults to 512.");
-
-export const fpsSchema = z
-  .number()
-  .int()
-  .positive()
-  .optional()
-  .describe("Optional intended animation FPS metadata for callers. Defaults to 30.");
-
-export const durationSchema = z
-  .number()
-  .positive()
-  .optional()
-  .describe("Optional duration override in seconds for generated animation presets.");
 
 export const overwriteSchema = z
   .boolean()

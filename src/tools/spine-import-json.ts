@@ -31,14 +31,16 @@ export function registerSpineImportJsonTool(server: McpServer): void {
     schema,
     async ({ inputPath, outputProjectPath, skeletonName, scale }) => {
       try {
-        const args = ["-i", inputPath, "-o", outputProjectPath, "-r"];
-
-        if (skeletonName) {
-          args.push(skeletonName);
-        }
+        const args = ["-i", inputPath];
 
         if (scale !== undefined) {
           args.push("-s", String(scale));
+        }
+
+        args.push("-o", outputProjectPath, "-r");
+
+        if (skeletonName) {
+          args.push(skeletonName);
         }
 
         const result = await runSpine(args);

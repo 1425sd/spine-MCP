@@ -126,8 +126,16 @@ export function textContent(text: string) {
 export async function validateExportSettingsPath(
   exportSettingsPath: string | undefined,
   toolName: string,
+  options: { required?: boolean } = {},
 ): Promise<{ valid: true } | { valid: false; error: string }> {
   if (!exportSettingsPath) {
+    if (options.required) {
+      return {
+        valid: false,
+        error: `${toolName} requires a Spine export settings JSON file path. Spine CLI export usage is -i <input> -o <output> -e <settings.json>.`,
+      };
+    }
+
     return { valid: true };
   }
 
@@ -139,7 +147,7 @@ export async function validateExportSettingsPath(
   if (looksLikeModeString) {
     return {
       valid: false,
-      error: `Spine CLI -e requires an export settings JSON file path. Received mode string: "${exportSettingsPath}". Please provide a real export settings JSON file, or omit exportMode/exportModeOrSettings to use Spine's default export.`,
+      error: `Spine CLI -e requires an export settings JSON file path. Received mode string: "${exportSettingsPath}". Please provide a real .json export settings file. Spine 3.8.75 does not accept mode strings such as "json" or "json+pack" for -e.`,
     };
   }
 
